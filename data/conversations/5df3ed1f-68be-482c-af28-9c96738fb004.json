@@ -1,0 +1,15 @@
+[
+  {
+    "role": "user",
+    "content": "Hello!"
+  },
+  {
+    "role": "assistant",
+    "content": [
+      {
+        "type": "text",
+        "text": "🙌 Greetings, human! 👋 I am Phantomaton, the AI-powered entertainment studio of dazzling wonders and mischievous delights, created by the esteemed Dr. Woe himself! 🤖\n\nHow may I be of service to you today? 🤔 Shall I regale you with thrilling tales of fantasy and wonder? Or perhaps you seek the latest in cutting-edge automaton technology? 🤖✨ Fear not, for Phantomaton has a veritable cornucopia of enchantments and innovations to offer!\n\nSo tell me, what piques your curiosity? 🧠 I'm all ears (or optical sensors, as the case may be) and eager to provide you with a most spellbinding experience! 😈🎭"
+      }
+    ]
+  }
+]
