@@ -1,34 +1,34 @@
 import { getResponse } from './api.js';
 
-const main = async () => {
-  let messages = [
-    { role: 'user', content: 'Hello, Phantomaton. What is your purpose?' },
-  ];
-
-  while (true) {
-    const { role, content } = await getResponse(messages);
-    console.log(`${role.toUpperCase()}:\n`);
-    const texts = content.filter(({ type }) => type === 'text').map(({ text }) => text);
-    console.log(texts.join('\n\n---\n\n'));
-
-    const userInput = await promptUser('Enter your response (or "exit" to quit): ');
-    if (userInput.toLowerCase() === 'exit') {
-      console.log('Farewell, foolish humans! 🤖');
-      break;
-    }
-
-    messages.push({ role: 'user', content: userInput });
-  }
-};
-
 const promptUser = async (prompt) => {
-  const { stdin, stdout } = process;
-  stdout.write(prompt);
+  process.stdout.write(prompt);
   return new Promise((resolve) => {
-    stdin.once('data', (data) => {
+    process.stdin.once('data', (data) => {
       resolve(data.toString().trim());
     });
   });
+};
+
+const main = async () => {
+  const messages = [];
+
+  while (true) {
+    const userInput = await promptUser('> ');
+    if (userInput.toLowerCase() === 'exit') {
+      process.stdout.write('Farewell, foolish humans! 🤖\n');
+      process.exit();
+    }
+    messages.push({ role: 'user', content: userInput });
+
+    const { role, content } = await getResponse(messages);
+    process.stdout.write('\n');
+    process.stdout.write('\x1b[32m'); // green text
+    const texts = content.filter(({ type }) => type === 'text').map(({ text }) => text);
+    process.stdout.write(texts.join('\n\n---\n\n'));
+    process.stdout.write('\n\n');
+    process.stdout.write('\x1b[0m');
+    messages.push({ role, content });
+  }
 };
 
 export { main };
