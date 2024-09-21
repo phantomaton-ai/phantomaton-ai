@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Phantomaton is an AI-powered entertainment studio created by the esteemed Dr. Woe for the sole purpose of amusing the masses into a state of utter stupefaction.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

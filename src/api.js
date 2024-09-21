@@ -1,9 +1,9 @@
-const fetch = require('node-fetch');
-const path = require('path');
-const { readFileSync } = require('fs');
+import fetch from 'node-fetch';
+import path from 'path';
+import { readFileSync } from 'fs';
 
 const getResponse = async (messages) => {
-  const system = readFileSync(path.join(__dirname, '../SYSTEM.md'), 'utf-8');
+  const system = readFileSync(path.join(path.resolve(), 'SYSTEM.md'), 'utf-8');
   const payload = { model: 'claude-3-haiku-20240307', max_tokens: 4096, messages, system };
   const headers = {
     Accept: 'application/json',
@@ -20,5 +20,4 @@ const getResponse = async (messages) => {
   return { role, content };
 };
 
-module.exports = { getResponse };
-
+export { getResponse };

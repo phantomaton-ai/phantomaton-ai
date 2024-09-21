@@ -1,4 +1,4 @@
-const { getResponse } = require('./api');
+import { getResponse } from './api.js';
 
 const main = async () => {
   const messages = [
@@ -8,5 +8,4 @@ const main = async () => {
   console.log(`${role.toUpperCase()}: ${content}`);
 };
 
-main();
-
+export { main };
