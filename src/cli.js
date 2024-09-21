@@ -1,4 +1,7 @@
 import { getResponse } from './api.js';
+import { v4 as uuidv4 } from 'uuid';
+import fs from 'fs';
+import path from 'path';
 
 const promptUser = async (prompt) => {
   process.stdout.write(prompt);
@@ -10,12 +13,22 @@ const promptUser = async (prompt) => {
 };
 
 const main = async () => {
-  const messages = [];
+  let conversationId = process.argv[2] || uuidv4();
+  const conversationPath = path.join('data', 'conversations', `${conversationId}.json`);
+  let messages = [];
+
+  if (fs.existsSync(conversationPath)) {
+    messages = JSON.parse(fs.readFileSync(conversationPath, 'utf-8'));
+    console.log(`Continuing conversation: ${conversationId}`);
+  } else {
+    console.log(`Starting new conversation: ${conversationId}`);
+  }
 
   while (true) {
     const userInput = await promptUser('> ');
     if (userInput.toLowerCase() === 'exit') {
       process.stdout.write('Farewell, foolish humans! 🤖\n');
+      fs.writeFileSync(conversationPath, JSON.stringify(messages, null, 2));
       process.exit();
     }
     messages.push({ role: 'user', content: userInput });
