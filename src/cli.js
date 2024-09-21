@@ -5,7 +5,7 @@ const main = async () => {
     { role: 'user', content: 'Hello, Phantomaton. What is your purpose?' },
   ];
   const { role, content } = await getResponse(messages);
-  console.log(`${role.toUpperCase()}: ${content}`);
+  console.log(`${role.toUpperCase()}: ${JSON.stringify(content)}`);
 };
 
 export { main };
