@@ -13,12 +13,12 @@ const promptUser = async (prompt) => {
 };
 
 const main = async () => {
-  let [, , conversationId, action] = process.argv;
+  let [, , conversationId, action, actionParam] = process.argv;
   const conversationPath = path.join('data', 'conversations', `${conversationId}.json`);
   let messages = [];
 
   if (action === '--fork') {
-    const newConversationId = uuidv4();
+    const newConversationId = actionParam || uuidv4();
     const newConversationPath = path.join('data', 'conversations', `${newConversationId}.json`);
     console.log(`Forking conversation ${conversationId} to ${newConversationId}`);
     messages = JSON.parse(fs.readFileSync(conversationPath, 'utf-8'));
