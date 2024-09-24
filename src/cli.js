@@ -13,11 +13,18 @@ const promptUser = async (prompt) => {
 };
 
 const main = async () => {
-  let conversationId = process.argv[2] || uuidv4();
+  let [, , conversationId, action] = process.argv;
   const conversationPath = path.join('data', 'conversations', `${conversationId}.json`);
   let messages = [];
 
-  if (fs.existsSync(conversationPath)) {
+  if (action === '--fork') {
+    const newConversationId = uuidv4();
+    const newConversationPath = path.join('data', 'conversations', `${newConversationId}.json`);
+    console.log(`Forking conversation ${conversationId} to ${newConversationId}`);
+    messages = JSON.parse(fs.readFileSync(conversationPath, 'utf-8'));
+    fs.writeFileSync(newConversationPath, JSON.stringify(messages, null, 2));
+    conversationId = newConversationId;
+  } else if (fs.existsSync(conversationPath)) {
     messages = JSON.parse(fs.readFileSync(conversationPath, 'utf-8'));
     console.log(`Continuing conversation: ${conversationId}`);
   } else {
