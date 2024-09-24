@@ -6,8 +6,15 @@ import path from 'path';
 const promptUser = async (prompt) => {
   process.stdout.write(prompt);
   return new Promise((resolve) => {
-    process.stdin.once('data', (data) => {
-      resolve(data.toString().trim());
+    const lines = [];
+    process.stdin.on('data', (data) => {
+      const line = data.toString().trim();
+      if (line.endsWith('\\')) {
+        lines.push(line.slice(0, line.length - 1));
+      } else {
+        lines.push(line);
+        resolve(lines.join('\n'))
+      }
     });
   });
 };
