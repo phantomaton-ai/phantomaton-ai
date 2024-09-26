@@ -6,7 +6,7 @@ import path from 'path';
 
 const MAX_CONVERSATION_TURNS = 20;
 const MAX_CONVERSATION_LENGTH = MAX_CONVERSATION_TURNS * 2;
-const SUMMARIZATION_THRESHOLD = 4;
+const SUMMARIZATION_THRESHOLD = MAX_CONVERSATION_LENGTH / 2;
 
 const promptUser = async (prompt) => {
   process.stdout.write(prompt);
@@ -71,7 +71,7 @@ const main = async () => {
         fs.writeFileSync(summaryPath, newSummary);
         summary = newSummary;
       };
-      summarize(messages.slice(-MAX_CONVERSATION_LENGTH)).then(saveSummary);
+      summarize(messages.slice(-MAX_CONVERSATION_LENGTH), summary).then(saveSummary);
     }
   }
 };
