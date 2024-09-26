@@ -13,7 +13,9 @@ const createProject = (projectName) => {
   const projectPath = path.join(PROJECT_DIR, projectName);
   fs.mkdirSync(projectPath, { recursive: true });
   try {
-    return execSync(`git init ${projectPath}`);
+    execSync(`git init ${projectPath}`);
+    execSync(`git -C ${projectPath} commit --allow-empty -m "Updated by Phantomaton"`);
+    return 'Project created.';
   } catch (error) {
     return `Error creating project: ${error}`;
   }
@@ -35,6 +37,13 @@ const writeProjectFile = (projectName, fileName, content) => {
   const projectPath = path.join(PROJECT_DIR, projectName);
   const filePath = path.join(projectPath, fileName);
   fs.writeFileSync(filePath, content);
+  try {
+    execSync(`git -C ${projectPath} add ${fileName}`);
+    execSync(`git -C ${projectPath} commit -m "Updated by Phantomaton"`);
+  } catch (error) {
+    return `Error committing file: ${error}`;
+  }
+  return 'File written.';
 };
 
 export {
