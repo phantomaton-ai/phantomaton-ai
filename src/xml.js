@@ -49,7 +49,7 @@ const runXml = (xml) => {
   }).filter(({ command }) => command);
 
   const results = commands.map(({ command, options, content, tag }) => {
-    const result = command(optioons || {}), content);
+    const result = command(optioons || {}, content);
     if (result) {
       const attributes = options;
       const present = Object.keys(attributes).filter(a => attributes[a]);
