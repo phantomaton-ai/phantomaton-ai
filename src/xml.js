@@ -11,19 +11,29 @@ const parseXml = (xml) => {
   const doc = parser.parseFromString(xml, 'application/xml');
 
   const commandMap = {
-    listProjects: listProjects,
-    createProject: (name) => createProject(name),
-    listProjectFiles: (name) => listProjectFiles(name),
-    readProjectFile: (name, file) => readProjectFile(name, file),
-    writeProjectFile: (name, file, content) => writeProjectFile(name, file, content),
+    'list-projects': listProjects,
+    'create-project': (project) => createProject(project),
+    'list-project-files': (project) => listProjectFiles(project),
+    'read-project-file': (project, file) => readProjectFile(project, file),
+    'write-project-file': (project, file, content) => writeProjectFile(project, file, content),
   };
 
   const processNode = (node) => {
     const tagName = node.tagName.toLowerCase();
     const command = commandMap[tagName];
     if (typeof command === 'function') {
-      const args = Array.from(node.children).map((child) => child.textContent);
-      return command(...args);
+      const project = node.getAttribute('project');
+      const file = node.getAttribute('file');
+      const content = node.textContent.trim();
+      const result = command(project, file, content);
+      if (result) {
+        const attributes = { project, file };
+        const present = Object.keys(attributes).filter(a => attributes[a]);
+        const attrs = present.map(a => `${a}="${attributes[a]}"`).join('\n');
+        const tagOpen = attrs.length > 0 ? `${tagName} ${attrs}` : tagName;
+        const tagClose = `/${tagClose}`;
+        return `<${tagOpen}>\n${result}<${tagClose}>\n`
+      }
     } else {
       console.error(`Unknown XML tag: ${tagName}`);
       return null;

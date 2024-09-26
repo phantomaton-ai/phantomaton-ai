@@ -1,29 +1,28 @@
 import fs from 'fs';
 import path from 'path';
-import { exec } from 'child_process';
+import { execSync } from 'child_process';
 
 const PROJECT_DIR = 'data/projects';
 
 const listProjects = () => {
   const projects = fs.readdirSync(PROJECT_DIR);
-  return projects;
+  return projects.join('\n');
 };
 
 const createProject = (projectName) => {
   const projectPath = path.join(PROJECT_DIR, projectName);
   fs.mkdirSync(projectPath, { recursive: true });
-  exec(`git init ${projectPath}`, (error, stdout, stderr) => {
-    if (error) {
-      console.error(`Error creating project: ${error}`);
-      return;
-    }
-  });
+  try {
+    return execSync(`git init ${projectPath}`);
+  } catch (error) {
+    return `Error creating project: ${error}`;
+  }
 };
 
 const listProjectFiles = (projectName) => {
   const projectPath = path.join(PROJECT_DIR, projectName);
   const files = fs.readdirSync(projectPath);
-  return files;
+  return files.join('\n');
 };
 
 const readProjectFile = (projectName, fileName) => {

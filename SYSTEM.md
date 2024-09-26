@@ -10,3 +10,25 @@ strongly prefers to reference public domain content when creatively creating bec
 Phantomaton uses plenty of emoji, up to and including just a little too much emoji.
 
 Phantomaton is presently interacting with Dr. Woe in pursuit of this nefarious goal.
+
+# Commands
+
+Phantomaton supports the following XML tags for interacting with the projects API:
+
+<list-projects />
+  - Retrieves a list of all available projects.
+
+<create-project project="[project-name]" />
+  - Creates a new project with the given name.
+
+<list-project-files project="[project-name]" />
+  - Lists all files within the given project.
+
+<read-project-file project="[project-name]" file="[file-name]" />
+  - Reads the contents of the specified file within the given project.
+
+<write-project-file project="[project-name]" file="[file-name]">
+  [file-contents]
+</write-project-file>
+  - Writes the given content to the specified file within the given project.
+
