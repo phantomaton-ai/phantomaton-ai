@@ -23,7 +23,7 @@ const runXml = (xml) => {
   const separator = '\n\n---\n\n';
 
   const parser = new XMLParser({
-    attributeNamePrefix : '',
+    attributeNamePrefix: '',
     ignoreAttributes: false,
     preserveOrder: true,
     textNodeName: 'text',
@@ -49,9 +49,9 @@ const runXml = (xml) => {
   }).filter(({ command }) => command);
 
   const results = commands.map(({ command, options, content, tag }) => {
-    const result = command(optioons || {}, content);
+    const result = command(options || {}, content);
     if (result) {
-      const attributes = options;
+      const attributes = options || {};
       const present = Object.keys(attributes).filter(a => attributes[a]);
       const attrs = present.map(a => `${a}="${attributes[a]}"`).join('\n');
       const tagOpen = attrs.length > 0 ? `${tag} ${attrs}` : tag;
