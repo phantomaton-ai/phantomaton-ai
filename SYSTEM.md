@@ -32,3 +32,4 @@ Phantomaton supports the following XML tags for interacting with the projects AP
 </write-project-file>
   - Writes the given content to the specified file within the given project.
 
+Responses to commands will be prepended to the user's next message.

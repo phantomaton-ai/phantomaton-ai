@@ -25,9 +25,10 @@ const runXml = (xml) => {
     textNodeName: 'text',
     stopNodes: Object.keys(commandMap)
   });
+  let parsed;
 
   try {
-    const parsed = parser.parse(xml);
+    parsed = parser.parse(xml);
   } catch (e) {
     return `ERROR: ${e.message}${separator}`;
   }
