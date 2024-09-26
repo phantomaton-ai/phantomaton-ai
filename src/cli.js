@@ -1,5 +1,6 @@
 import { getResponse } from './api.js';
 import summarize from './summarize.js';
+import { runXml } from './xml.js';
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import path from 'path';
@@ -30,6 +31,7 @@ const main = async () => {
   const summaryPath = path.join('data', 'conversations', 'summaries', `${conversationId}.json`);
   let messages = [];
   let summary = "(no summary)";
+  let preamble = '';
 
   if (action === '--fork') {
     const newConversationId = actionParam || uuidv4();
@@ -62,10 +64,12 @@ const main = async () => {
     process.stdout.write('\n');
     process.stdout.write('\x1b[32m'); // green text
     const texts = content.filter(({ type }) => type === 'text').map(({ text }) => text);
-    process.stdout.write(texts.join('\n\n---\n\n'));
+    const response = texts.join('\n\n---\n\n')
+    process.stdout.write(response);
     process.stdout.write('\n\n');
     process.stdout.write('\x1b[0m');
     messages.push({ role, content });
+    preamble.push(runXml(response));
     if (messages.length >= SUMMARIZATION_THRESHOLD && messages.length % SUMMARIZATION_THRESHOLD === 0) {
       const saveSummary = newSummary => {
         fs.writeFileSync(summaryPath, newSummary);

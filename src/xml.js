@@ -6,7 +6,7 @@ import {
   writeProjectFile,
 } from './projects.js';
 
-const parseXml = (xml) => {
+const runXml = (xml) => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(xml, 'application/xml');
 
@@ -41,7 +41,8 @@ const parseXml = (xml) => {
   };
 
   const result = Array.from(doc.documentElement.children).map(processNode);
-  return result.filter((r) => r !== null);
+  const nonempty = result.filter((r) => r !== null);
+  return nonempty.length < 1 ? '' : nonempty.join('\n') + '\n\n---\n\n';
 };
 
-export { parseXml };
+export { runXml };
