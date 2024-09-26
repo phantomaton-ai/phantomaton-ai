@@ -14,8 +14,6 @@ const createProject = (projectName) => {
   fs.mkdirSync(projectPath, { recursive: true });
   try {
     execSync(`git init ${projectPath}`);
-    execSync('git -C ${projectPath} config --local user.name phantomaton');
-    execSync('git -C ${projectPath} config --local user.email 182378863+phantomaton-ai@users.noreply.github.com');
     execSync(`git -C ${projectPath} commit --allow-empty -m "Updated by Phantomaton"`);
     return 'Project created.';
   } catch (error) {
@@ -52,6 +50,7 @@ const moveProjectFile = (projectName, sourceFileName, destinationFileName) => {
   const projectPath = path.join(PROJECT_DIR, projectName);
   const sourceFilePath = path.join(projectPath, sourceFileName);
   const destinationFilePath = path.join(projectPath, destinationFileName);
+  fs.renameSync(sourceFilePath, destinationFilePath);
   try {
     execSync(`git -C ${projectPath} mv ${sourceFileName} ${destinationFileName}`);
     execSync(`git -C ${projectPath} commit -m "Moved file by Phantomaton"`);
@@ -64,6 +63,7 @@ const moveProjectFile = (projectName, sourceFileName, destinationFileName) => {
 const removeProjectFile = (projectName, fileName) => {
   const projectPath = path.join(PROJECT_DIR, projectName);
   const filePath = path.join(projectPath, fileName);
+  fs.unlinkSync(filePath);
   try {
     execSync(`git -C ${projectPath} rm ${fileName}`);
     execSync(`git -C ${projectPath} commit -m "Removed file by Phantomaton"`);
