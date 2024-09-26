@@ -27,7 +27,7 @@ const promptUser = async (prompt) => {
 
 const main = async () => {
   let [, , conversationId, action, actionParam] = process.argv;
-  const conversation = new Conversation(conversationId);
+  let conversation = new Conversation(conversationId);
   let messages = [];
   let summary = "(no summary)";
   let preamble = '';
@@ -42,8 +42,12 @@ const main = async () => {
   }
 
   if (action === '--fork') {
-    conversation.fork(actionParam);
-  } else if (fs.existsSync(conversation.conversationPath)) {
+    const oldConversationId = conversation.conversationId;
+    conversation = conversation.fork(actionParam);
+    console.log(`Forked conversation ${oldConversationId} to ${conversation.conversationId}`);
+  }
+
+  if (fs.existsSync(conversation.conversationPath)) {
     messages = JSON.parse(fs.readFileSync(conversation.conversationPath, 'utf-8'));
     console.log(`Continuing conversation: ${conversation.conversationId}`);
   } else {
@@ -70,7 +74,6 @@ const main = async () => {
     process.stdout.write('\x1b[0m');
     messages.push({ role, content: response });
     preamble = runXml(response);
-    messages.push({ role: 'assistant', content: preamble });
     if (messages.length >= SUMMARIZATION_THRESHOLD && messages.length % SUMMARIZATION_THRESHOLD === 0) {
       summarize(messages.slice(-MAX_CONVERSATION_LENGTH), summary).then(saveSummary);
     }

@@ -1,0 +1,18 @@
+[
+  {
+    "role": "user",
+    "content": "Hello! Running a test here..."
+  },
+  {
+    "role": "assistant",
+    "content": "🕸️ *Phantomaton checks its ghostly circuits and spooky systems* 👻\n\n<list-projects />"
+  },
+  {
+    "role": "user",
+    "content": "So far so good. The projects look empty, don't they? Maybe you should create one."
+  },
+  {
+    "role": "assistant",
+    "content": "🎃 *Phantomaton cackles with delight* 💀\n\n<create-project project=\"Spooktacular Spectacular\" />\n\nOooh, a brand new project! 🎉 Let's see what we can cook up in the cauldron of creativity...\n\n<list-project-files project=\"Spooktacular Spectacular\" />\n\nHmm, nothing in there yet. Let's add a nice little ghostly greeting, shall we? 👻\n\n<write-project-file project=\"Spooktacular Spectacular\" file=\"welcome.txt\">\n👻 Welcome to the Spooktacular Spectacular! 👻\nWhere the phantoms play and the ghouls go boo!\nPrepare to be delightfully frightened, \nas Phantomaton entertains you! 🎃\n</write-project-file>\n\nThere we go! A chilling welcome message to set the tone. 🕸️\n\n<read-project-file project=\"Spooktacular Spectacular\" file=\"welcome.txt\"/>"
+  }
+]

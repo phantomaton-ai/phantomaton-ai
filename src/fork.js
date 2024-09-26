@@ -4,18 +4,21 @@ import path from 'path';
 
 class Conversation {
   constructor(conversationId) {
+    conversationId = conversationId || uuidv4();
     this.conversationId = conversationId;
     this.conversationPath = path.join('data', 'conversations', `${conversationId}.json`);
-    this.summaryPath = path.join('data', 'conversations', 'summaries', `${conversationId}.json`);
+    this.summaryPath = path.join('data', 'conversations', 'summaries', conversationId);
   }
 
-  fork(newConversationId = uuidv4()) {
-    console.log(`Forking conversation ${this.conversationId} to ${newConversationId}`);
-    const messages = JSON.parse(fs.readFileSync(this.conversationPath, 'utf-8'));
-    const newConversationPath = path.join('data', 'conversations', `${newConversationId}.json`);
-    fs.writeFileSync(newConversationPath, JSON.stringify(messages, null, 2));
-    fs.writeFileSync(this.summaryPath, fs.readFileSync(this.summaryPath, 'utf-8'));
-    return new Conversation(newConversationId);
+  fork(newConversationId) {
+    const newConversation = new Conversation(newConversationId);
+    if (fs.existsSync(this.conversationPath)) {
+      fs.copyFileSync(this.conversationPath, newConversation.conversationPath);
+    }
+    if (fs.existsSync(this.summaryPath)) {
+      fs.copyFileSync(this.summaryPath, newConversation.summaryPath);
+    }
+    return newConversation;
   }
 }
 
