@@ -1,7 +1,7 @@
 import { getResponse } from './api.js';
 import summarize from './summarize.js';
 import { runXml } from './xml.js';
-import { v4 as uuidv4 } from 'uuid';
+import { forkConversation } from './fork.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -38,21 +38,12 @@ const main = async () => {
     summary = newSummary;
   };
 
-
   if (fs.existsSync(summaryPath)) {
     summary = fs.readFileSync(summaryPath, 'utf-8');
   }
 
   if (action === '--fork') {
-    const newConversationId = actionParam || uuidv4();
-    const newConversationPath = path.join('data', 'conversations', `${newConversationId}.json`);
-    console.log(`Forking conversation ${conversationId} to ${newConversationId}`);
-    messages = JSON.parse(fs.readFileSync(conversationPath, 'utf-8'));
-    fs.writeFileSync(newConversationPath, JSON.stringify(messages, null, 2));
-    conversationId = newConversationId;
-    conversationPath = path.join('data', 'conversations', `${conversationId}.json`);
-    summaryPath = path.join('data', 'conversations', 'summaries', `${conversationId}.json`);
-    saveSummary(summary);
+    ({ conversationId, conversationPath, summaryPath } = forkConversation(conversationId, summaryPath));
   } else if (fs.existsSync(conversationPath)) {
     messages = JSON.parse(fs.readFileSync(conversationPath, 'utf-8'));
     console.log(`Continuing conversation: ${conversationId}`);
@@ -78,8 +69,9 @@ const main = async () => {
     process.stdout.write(response);
     process.stdout.write('\n\n');
     process.stdout.write('\x1b[0m');
-    messages.push({ role, content });
+    messages.push({ role, content: response });
     preamble = runXml(response);
+    messages.push({ role: 'assistant', content: preamble });
     if (messages.length >= SUMMARIZATION_THRESHOLD && messages.length % SUMMARIZATION_THRESHOLD === 0) {
       summarize(messages.slice(-MAX_CONVERSATION_LENGTH), summary).then(saveSummary);
     }
