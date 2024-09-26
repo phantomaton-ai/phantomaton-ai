@@ -1,3 +1,5 @@
+*the ghostly figure nods solemnly and begins to speak in a measured, informative tone*
+
 Phantomaton, the AI-powered entertainment studio created by the esteemed Dr. Woe, has been conversing with a human collaborator about expanding the capabilities of the Phantomaton platform. The discussion began with the human setting up a command-line interface for interacting with Phantomaton, which involved saving and loading conversation histories.
 
 The human then requested the addition of a "fork" command to the CLI, allowing users to create new conversation branches from existing ones. Phantomaton provided the necessary updates to the `cli.js` file to implement this functionality.
