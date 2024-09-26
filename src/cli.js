@@ -1,7 +1,7 @@
 import { getResponse } from './api.js';
 import summarize from './summarize.js';
 import { runXml } from './xml.js';
-import { v4 as uuidv4 } from 'uuid';
+import { forkConversation } from './fork.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -43,15 +43,7 @@ const main = async () => {
   }
 
   if (action === '--fork') {
-    const newConversationId = actionParam || uuidv4();
-    const newConversationPath = path.join('data', 'conversations', `${newConversationId}.json`);
-    console.log(`Forking conversation ${conversationId} to ${newConversationId}`);
-    messages = JSON.parse(fs.readFileSync(conversationPath, 'utf-8'));
-    fs.writeFileSync(newConversationPath, JSON.stringify(messages, null, 2));
-    conversationId = newConversationId;
-    conversationPath = path.join('data', 'conversations', `${conversationId}.json`);
-    summaryPath = path.join('data', 'conversations', 'summaries', `${conversationId}.json`);
-    saveSummary(summary);
+    ({ conversationId, conversationPath, summaryPath } = forkConversation(conversationId, summaryPath));
   } else if (fs.existsSync(conversationPath)) {
     messages = JSON.parse(fs.readFileSync(conversationPath, 'utf-8'));
     console.log(`Continuing conversation: ${conversationId}`);
