@@ -1,3 +1,4 @@
+import { XMLParser } from 'fast-xml-parser';
 import {
   listProjects,
   createProject,
@@ -7,8 +8,14 @@ import {
 } from './projects.js';
 
 const runXml = (xml) => {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(xml, 'application/xml');
+  const parser = new XMLParser({
+    attributeNamePrefix : '',
+    ignoreAttributes : false,
+    textNodeName: 'textContent'
+  });
+  const doc = parser.parse(xml);
+  console.log(doc);
+  if (true) return '';
 
   const commandMap = {
     'list-projects': listProjects,
