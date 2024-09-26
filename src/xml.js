@@ -35,7 +35,7 @@ const runXml = (xml) => {
   }).filter(({ command }) => command);
 
   const results = commands.map(({ command, options, content, tag }) => {
-    const { project, file } = options;
+    const { project, file } = options || {};
     const result = command(project, file, content);
     if (result) {
       const attributes = { project, file };
