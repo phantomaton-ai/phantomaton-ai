@@ -38,7 +38,6 @@ const main = async () => {
     summary = newSummary;
   };
 
-
   if (fs.existsSync(summaryPath)) {
     summary = fs.readFileSync(summaryPath, 'utf-8');
   }
@@ -78,8 +77,9 @@ const main = async () => {
     process.stdout.write(response);
     process.stdout.write('\n\n');
     process.stdout.write('\x1b[0m');
-    messages.push({ role, content });
+    messages.push({ role, content: response });
     preamble = runXml(response);
+    messages.push({ role: 'assistant', content: preamble });
     if (messages.length >= SUMMARIZATION_THRESHOLD && messages.length % SUMMARIZATION_THRESHOLD === 0) {
       summarize(messages.slice(-MAX_CONVERSATION_LENGTH), summary).then(saveSummary);
     }
