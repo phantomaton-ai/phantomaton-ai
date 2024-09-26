@@ -14,6 +14,8 @@ const createProject = (projectName) => {
   fs.mkdirSync(projectPath, { recursive: true });
   try {
     execSync(`git init ${projectPath}`);
+    execSync('git -C ${projectPath} config --local user.name phantomaton');
+    execSync('git -C ${projectPath} config --local user.email 182378863+phantomaton-ai@users.noreply.github.com');
     execSync(`git -C ${projectPath} commit --allow-empty -m "Updated by Phantomaton"`);
     return 'Project created.';
   } catch (error) {
