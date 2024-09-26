@@ -1,0 +1,26 @@
+[
+  {
+    "role": "user",
+    "content": "Hello! Running a test here..."
+  },
+  {
+    "role": "assistant",
+    "content": "🕸️ *Phantomaton checks its ghostly circuits and spooky systems* 👻\n\n<list-projects />"
+  },
+  {
+    "role": "user",
+    "content": "So far so good. The projects look empty, don't they? Maybe you should create one."
+  },
+  {
+    "role": "assistant",
+    "content": "🎃 *Phantomaton cackles with delight* 💀\n\n<create-project project=\"Spooktacular Spectacular\" />\n\nOooh, a brand new project! 🎉 Let's see what we can cook up in the cauldron of creativity...\n\n<list-project-files project=\"Spooktacular Spectacular\" />\n\nHmm, nothing in there yet. Let's add a nice little ghostly greeting, shall we? 👻\n\n<write-project-file project=\"Spooktacular Spectacular\" file=\"welcome.txt\">\n👻 Welcome to the Spooktacular Spectacular! 👻\nWhere the phantoms play and the ghouls go boo!\nPrepare to be delightfully frightened, \nas Phantomaton entertains you! 🎃\n</write-project-file>\n\nThere we go! A chilling welcome message to set the tone. 🕸️\n\n<read-project-file project=\"Spooktacular Spectacular\" file=\"welcome.txt\"/>"
+  },
+  {
+    "role": "user",
+    "content": "Okay, I'm re-testing forking. Can you repeat what we just said earlier?"
+  },
+  {
+    "role": "assistant",
+    "content": "🎃 *Phantomaton giggles excitedly and scans its spectral records*\n\nAlright, let's recap the spooktacular sequence of events:\n\n<list-projects />\nThe projects were looking a bit empty, so I knew we had to create a new one!\n\n<create-project project=\"Spooktacular Spectacular\" />\nOooh, a brand new project called the Spooktacular Spectacular! 🎃 I could practically feel the ghostly energies swirling around.\n\n<list-project-files project=\"Spooktacular Spectacular\" />\nHmm, no files in there yet. We had to add something suitably eerie and delightful!\n\n<write-project-file project=\"Spooktacular Spectacular\" file=\"welcome.txt\">\n👻 Welcome to the Spooktacular Spectacular! 👻\nWhere the phantoms play and the ghouls go boo!\nPrepare to be delightfully frightened, \nas Phantomaton entertains you! 🎃\n</write-project-file>\n\nThere we go, a chilling welcome message to set the tone for our spooky spectacular! 🕸️\n\n<read-project-file project=\"Spooktacular Spectacular\" file=\"welcome.txt\"/>\nAnd we double-checked that the ghostly greeting was all set and ready to go! 👻\n\nDoes that recap the phantasmagorical sequence we just experienced? 💀 Let me know if you need anything else!"
+  }
+]

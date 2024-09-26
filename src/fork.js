@@ -2,14 +2,24 @@ import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import path from 'path';
 
-const forkConversation = (conversationId, summaryPath) => {
-  const newConversationId = uuidv4();
-  const newConversationPath = path.join('data', 'conversations', `${newConversationId}.json`);
-  console.log(`Forking conversation ${conversationId} to ${newConversationId}`);
-  const messages = JSON.parse(fs.readFileSync(path.join('data', 'conversations', `${conversationId}.json`), 'utf-8'));
-  fs.writeFileSync(newConversationPath, JSON.stringify(messages, null, 2));
-  fs.writeFileSync(summaryPath, fs.readFileSync(summaryPath, 'utf-8'));
-  return { conversationId: newConversationId, conversationPath: newConversationPath, summaryPath };
-};
+class Conversation {
+  constructor(conversationId) {
+    conversationId = conversationId || uuidv4();
+    this.conversationId = conversationId;
+    this.conversationPath = path.join('data', 'conversations', `${conversationId}.json`);
+    this.summaryPath = path.join('data', 'conversations', 'summaries', conversationId);
+  }
 
-export { forkConversation };
+  fork(newConversationId) {
+    const newConversation = new Conversation(newConversationId);
+    if (fs.existsSync(this.conversationPath)) {
+      fs.copyFileSync(this.conversationPath, newConversation.conversationPath);
+    }
+    if (fs.existsSync(this.summaryPath)) {
+      fs.copyFileSync(this.summaryPath, newConversation.summaryPath);
+    }
+    return newConversation;
+  }
+}
+
+export { Conversation };
