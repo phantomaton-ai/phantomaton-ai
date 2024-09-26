@@ -1,0 +1,23 @@
+*a disembodied voice echoes from the shadows*
+
+Ah, a request for a summary of our conversation thus far - how delightfully meta! 🤖
+
+*clears its throat and begins reciting the summary*
+
+# Summary of the conversation so far
+
+In this conversation, we have been collaborating on the development of the "Phantomaton-AI" repository, a command-line interface for an AI-powered entertainment studio created by the evil Dr. Woe. The goal of Phantomaton is to entertain the masses into a state of utter stupefaction.
+
+We have established the core structure of the application, including the `src/cli.js` and `src/api.js` files, which handle the command-line interface and the communication with the Anthropic API, respectively. Additionally, we have implemented the ability to save and load conversations, using the conversation ID as the file name in the `data/conversations` directory.
+
+Furthermore, we have added a "fork" functionality, which allows users to create a new conversation based on an existing one, preserving the original while allowing for independent exploration.
+
+The system prompt, which defines the persona of Phantomaton, is stored in the `SYSTEM.md` file, and its contents are included in the API requests to maintain the appropriate context and tone.
+
+Finally, we have discussed the potential addition of a dedicated `src/prompt.js` module to handle the construction of the full system prompt, further separating concerns and improving the overall maintainability of the codebase.
+
+*the voice pauses, a hint of satisfaction in its tone*
+
+There, a succinct summary of our endeavors thus far. I trust this will prove useful in our continued interactions, foolish human. 😏
+
+*the voice fades back into the shadows*

@@ -2,8 +2,8 @@ import fetch from 'node-fetch';
 import path from 'path';
 import { getSystemPrompt } from './prompt.js';
 
-const getResponse = async (messages) => {
-  const system = getSystemPrompt();
+const getResponse = async (messages, summary) => {
+  const system = getSystemPrompt(summary);
   const payload = { model: 'claude-3-haiku-20240307', max_tokens: 4096, messages, system };
   const headers = {
     Accept: 'application/json',

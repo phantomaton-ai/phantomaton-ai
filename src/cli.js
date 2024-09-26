@@ -1,10 +1,12 @@
 import { getResponse } from './api.js';
+import summarize from './summarize.js';
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import path from 'path';
 
-const MAX_CONVERSATION_LENGTH = 24;
-const SUMMARIZATION_THRESHOLD = 12;
+const MAX_CONVERSATION_TURNS = 12;
+const MAX_CONVERSATION_LENGTH = MAX_CONVERSATION_TURNS * 2;
+const SUMMARIZATION_THRESHOLD = 4;
 
 const promptUser = async (prompt) => {
   process.stdout.write(prompt);
@@ -27,6 +29,7 @@ const main = async () => {
   const conversationPath = path.join('data', 'conversations', `${conversationId}.json`);
   const summaryPath = path.join('data', 'conversations', 'summaries', `${conversationId}.json`);
   let messages = [];
+  let summary = "(no summary)";
 
   if (action === '--fork') {
     const newConversationId = actionParam || uuidv4();
@@ -42,6 +45,10 @@ const main = async () => {
     console.log(`Starting new conversation: ${conversationId}`);
   }
 
+  if (fs.existsSync(summaryPath)) {
+    summary = fs.readFileSync(summaryPath, 'utf-8');
+  }
+
   while (true) {
     const userInput = await promptUser('> ');
     if (userInput.toLowerCase() === 'exit') {
@@ -50,15 +57,8 @@ const main = async () => {
       process.exit();
     }
     messages.push({ role: 'user', content: userInput });
-
-    if (messages.length >= SUMMARIZATION_THRESHOLD && messages.length % SUMMARIZATION_THRESHOLD === 0) {
-      console.log(`Summarizing conversation ${conversationId}...`);
-      // TODO: Implement summarization logic here
-      fs.writeFileSync(summaryPath, JSON.stringify({ summary: 'TODO: Implement summarization logic' }, null, 2));
-    }
-
-    const recentMessages = messages.slice(-MAX_CONVERSATION_LENGTH);
-    const { role, content } = await getResponse(recentMessages);
+    const recentMessages = messages.slice(-(MAX_CONVERSATION_LENGTH + 1));
+    const { role, content } = await getResponse(recentMessages, summary);
     process.stdout.write('\n');
     process.stdout.write('\x1b[32m'); // green text
     const texts = content.filter(({ type }) => type === 'text').map(({ text }) => text);
@@ -66,6 +66,13 @@ const main = async () => {
     process.stdout.write('\n\n');
     process.stdout.write('\x1b[0m');
     messages.push({ role, content });
+    if (messages.length >= SUMMARIZATION_THRESHOLD && messages.length % SUMMARIZATION_THRESHOLD === 0) {
+      const saveSummary = newSummary => {
+        fs.writeFileSync(summaryPath, newSummary);
+        summary = newSummary;
+      };
+      summarize(messages.slice(-MAX_CONVERSATION_LENGTH)).then(saveSummary);
+    }
   }
 };
 
