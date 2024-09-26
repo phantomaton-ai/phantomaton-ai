@@ -16,6 +16,8 @@ const commandMap = {
 };
 
 const runXml = (xml) => {
+  const separator = '\n\n---\n\n';
+
   const parser = new XMLParser({
     attributeNamePrefix : '',
     ignoreAttributes: false,
@@ -24,7 +26,13 @@ const runXml = (xml) => {
     stopNodes: Object.keys(commandMap)
   });
 
-  const commands = parser.parse(xml).map(node => {
+  try {
+    const parsed = parser.parse(xml);
+  } catch (e) {
+    return `ERROR: ${e.message}${separator}`;
+  }
+  
+  const commands = parsed.map(node => {
     const block = {};
     const ugh = ':@'
     const options = node[ugh];
@@ -47,7 +55,7 @@ const runXml = (xml) => {
     }
   }).filter(result => result);
 
-  return results.length < 1 ? '' : results.join('\n') + '\n\n---\n\n';
+  return results.length < 1 ? '' : results.join('\n') + separator;
 };
 
 export { runXml };
