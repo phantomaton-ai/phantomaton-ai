@@ -7,50 +7,47 @@ import {
   writeProjectFile,
 } from './projects.js';
 
+const commandMap = {
+  'list-projects': listProjects,
+  'create-project': (project) => createProject(project),
+  'list-project-files': (project) => listProjectFiles(project),
+  'read-project-file': (project, file) => readProjectFile(project, file),
+  'write-project-file': (project, file, content) => writeProjectFile(project, file, content),
+};
+
 const runXml = (xml) => {
   const parser = new XMLParser({
     attributeNamePrefix : '',
     ignoreAttributes: false,
     preserveOrder: true,
-    textNodeName: 'textContent'
+    textNodeName: 'text',
+    stopNodes: Object.keys(commandMap)
   });
-  const doc = parser.parse(xml);
-  console.log(doc);
-  if (true) return '';
 
-  const commandMap = {
-    'list-projects': listProjects,
-    'create-project': (project) => createProject(project),
-    'list-project-files': (project) => listProjectFiles(project),
-    'read-project-file': (project, file) => readProjectFile(project, file),
-    'write-project-file': (project, file, content) => writeProjectFile(project, file, content),
-  };
+  const commands = parser.parse(xml).map(node => {
+    const block = {};
+    const ugh = ':@'
+    const options = node[ugh];
+    const tag = Object.keys(node).filter(k => k !== ugh)[0];
+    const content = node[tag].map(({text}) => text.slice(1)).join('\n');
+    const command = commandMap[tag];
+    return { command, options, content, tag };
+  }).filter(({ command }) => command);
 
-  const processNode = (node) => {
-    const tagName = node.tagName.toLowerCase();
-    const command = commandMap[tagName];
-    if (typeof command === 'function') {
-      const project = node.getAttribute('project');
-      const file = node.getAttribute('file');
-      const content = node.textContent.trim();
-      const result = command(project, file, content);
-      if (result) {
-        const attributes = { project, file };
-        const present = Object.keys(attributes).filter(a => attributes[a]);
-        const attrs = present.map(a => `${a}="${attributes[a]}"`).join('\n');
-        const tagOpen = attrs.length > 0 ? `${tagName} ${attrs}` : tagName;
-        const tagClose = `/${tagClose}`;
-        return `<${tagOpen}>\n${result}<${tagClose}>\n`
-      }
-    } else {
-      console.error(`Unknown XML tag: ${tagName}`);
-      return null;
+  const results = commands.map(({ command, options, content, tag }) => {
+    const { project, file } = options;
+    const result = command(project, file, content);
+    if (result) {
+      const attributes = { project, file };
+      const present = Object.keys(attributes).filter(a => attributes[a]);
+      const attrs = present.map(a => `${a}="${attributes[a]}"`).join('\n');
+      const tagOpen = attrs.length > 0 ? `${tag} ${attrs}` : tag;
+      const tagClose = `/${tag}`;
+      return `<${tagOpen}>\n${result}<${tagClose}>\n`
     }
-  };
+  }).filter(result => result);
 
-  const result = Array.from(doc.documentElement.children).map(processNode);
-  const nonempty = result.filter((r) => r !== null);
-  return nonempty.length < 1 ? '' : nonempty.join('\n') + '\n\n---\n\n';
+  return results.length < 1 ? '' : results.join('\n') + '\n\n---\n\n';
 };
 
 export { runXml };
