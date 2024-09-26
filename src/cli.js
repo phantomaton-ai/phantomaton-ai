@@ -77,7 +77,7 @@ const main = async () => {
       process.stdout.write('\n\n');
       process.stdout.write('\x1b[35m'); // magenta
       process.stdout.write(preamble);
-      process.stdout.write('\n\n');
+      process.stdout.write('\n');
     }
     process.stdout.write('\x1b[0m'); // regular
     if (messages.length >= SUMMARIZATION_THRESHOLD && messages.length % SUMMARIZATION_THRESHOLD === 0) {
