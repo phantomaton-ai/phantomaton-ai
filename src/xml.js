@@ -10,7 +10,8 @@ import {
 const runXml = (xml) => {
   const parser = new XMLParser({
     attributeNamePrefix : '',
-    ignoreAttributes : false,
+    ignoreAttributes: false,
+    preserveOrder: true,
     textNodeName: 'textContent'
   });
   const doc = parser.parse(xml);
