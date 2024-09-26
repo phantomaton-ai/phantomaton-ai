@@ -27,11 +27,21 @@ const promptUser = async (prompt) => {
 
 const main = async () => {
   let [, , conversationId, action, actionParam] = process.argv;
-  const conversationPath = path.join('data', 'conversations', `${conversationId}.json`);
-  const summaryPath = path.join('data', 'conversations', 'summaries', `${conversationId}.json`);
+  let conversationPath = path.join('data', 'conversations', `${conversationId}.json`);
+  let summaryPath = path.join('data', 'conversations', 'summaries', `${conversationId}.json`);
   let messages = [];
   let summary = "(no summary)";
   let preamble = '';
+
+  const saveSummary = newSummary => {
+    fs.writeFileSync(summaryPath, newSummary);
+    summary = newSummary;
+  };
+
+
+  if (fs.existsSync(summaryPath)) {
+    summary = fs.readFileSync(summaryPath, 'utf-8');
+  }
 
   if (action === '--fork') {
     const newConversationId = actionParam || uuidv4();
@@ -40,15 +50,14 @@ const main = async () => {
     messages = JSON.parse(fs.readFileSync(conversationPath, 'utf-8'));
     fs.writeFileSync(newConversationPath, JSON.stringify(messages, null, 2));
     conversationId = newConversationId;
+    conversationPath = path.join('data', 'conversations', `${conversationId}.json`);
+    summaryPath = path.join('data', 'conversations', 'summaries', `${conversationId}.json`);
+    saveSummary(summary);
   } else if (fs.existsSync(conversationPath)) {
     messages = JSON.parse(fs.readFileSync(conversationPath, 'utf-8'));
     console.log(`Continuing conversation: ${conversationId}`);
   } else {
     console.log(`Starting new conversation: ${conversationId}`);
-  }
-
-  if (fs.existsSync(summaryPath)) {
-    summary = fs.readFileSync(summaryPath, 'utf-8');
   }
 
   while (true) {
@@ -58,7 +67,8 @@ const main = async () => {
       fs.writeFileSync(conversationPath, JSON.stringify(messages, null, 2));
       process.exit();
     }
-    messages.push({ role: 'user', content: userInput });
+    const messageContent = preamble.length > 0 ? `${preamble}\n\n${userInput}` : userInput;
+    messages.push({ role: 'user', content: messageContent });
     const recentMessages = messages.slice(-(MAX_CONVERSATION_LENGTH + 1));
     const { role, content } = await getResponse(recentMessages, summary);
     process.stdout.write('\n');
@@ -69,12 +79,8 @@ const main = async () => {
     process.stdout.write('\n\n');
     process.stdout.write('\x1b[0m');
     messages.push({ role, content });
-    preamble.push(runXml(response));
+    preamble = runXml(response);
     if (messages.length >= SUMMARIZATION_THRESHOLD && messages.length % SUMMARIZATION_THRESHOLD === 0) {
-      const saveSummary = newSummary => {
-        fs.writeFileSync(summaryPath, newSummary);
-        summary = newSummary;
-      };
       summarize(messages.slice(-MAX_CONVERSATION_LENGTH), summary).then(saveSummary);
     }
   }
