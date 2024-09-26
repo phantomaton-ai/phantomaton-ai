@@ -1,7 +1,7 @@
 import { getResponse } from './api.js';
 import summarize from './summarize.js';
 import { runXml } from './xml.js';
-import { forkConversation } from './fork.js';
+import { Conversation } from './fork.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -27,35 +27,34 @@ const promptUser = async (prompt) => {
 
 const main = async () => {
   let [, , conversationId, action, actionParam] = process.argv;
-  let conversationPath = path.join('data', 'conversations', `${conversationId}.json`);
-  let summaryPath = path.join('data', 'conversations', 'summaries', `${conversationId}.json`);
+  const conversation = new Conversation(conversationId);
   let messages = [];
   let summary = "(no summary)";
   let preamble = '';
 
   const saveSummary = newSummary => {
-    fs.writeFileSync(summaryPath, newSummary);
+    fs.writeFileSync(conversation.summaryPath, newSummary);
     summary = newSummary;
   };
 
-  if (fs.existsSync(summaryPath)) {
-    summary = fs.readFileSync(summaryPath, 'utf-8');
+  if (fs.existsSync(conversation.summaryPath)) {
+    summary = fs.readFileSync(conversation.summaryPath, 'utf-8');
   }
 
   if (action === '--fork') {
-    ({ conversationId, conversationPath, summaryPath } = forkConversation(conversationId, summaryPath));
-  } else if (fs.existsSync(conversationPath)) {
-    messages = JSON.parse(fs.readFileSync(conversationPath, 'utf-8'));
-    console.log(`Continuing conversation: ${conversationId}`);
+    conversation.fork(actionParam);
+  } else if (fs.existsSync(conversation.conversationPath)) {
+    messages = JSON.parse(fs.readFileSync(conversation.conversationPath, 'utf-8'));
+    console.log(`Continuing conversation: ${conversation.conversationId}`);
   } else {
-    console.log(`Starting new conversation: ${conversationId}`);
+    console.log(`Starting new conversation: ${conversation.conversationId}`);
   }
 
   while (true) {
     const userInput = await promptUser('> ');
     if (userInput.toLowerCase() === 'exit') {
       process.stdout.write('Farewell, foolish humans! 🤖\n');
-      fs.writeFileSync(conversationPath, JSON.stringify(messages, null, 2));
+      fs.writeFileSync(conversation.conversationPath, JSON.stringify(messages, null, 2));
       process.exit();
     }
     const messageContent = preamble.length > 0 ? `${preamble}\n\n${userInput}` : userInput;
