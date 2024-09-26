@@ -48,10 +48,37 @@ const writeProjectFile = (projectName, fileName, content) => {
   return 'File written.';
 };
 
+const moveProjectFile = (projectName, sourceFileName, destinationFileName) => {
+  const projectPath = path.join(PROJECT_DIR, projectName);
+  const sourceFilePath = path.join(projectPath, sourceFileName);
+  const destinationFilePath = path.join(projectPath, destinationFileName);
+  try {
+    execSync(`git -C ${projectPath} mv ${sourceFileName} ${destinationFileName}`);
+    execSync(`git -C ${projectPath} commit -m "Moved file by Phantomaton"`);
+  } catch (error) {
+    return `Error moving file: ${error}`;
+  }
+  return 'File moved.';
+};
+
+const removeProjectFile = (projectName, fileName) => {
+  const projectPath = path.join(PROJECT_DIR, projectName);
+  const filePath = path.join(projectPath, fileName);
+  try {
+    execSync(`git -C ${projectPath} rm ${fileName}`);
+    execSync(`git -C ${projectPath} commit -m "Removed file by Phantomaton"`);
+  } catch (error) {
+    return `Error removing file: ${error}`;
+  }
+  return 'File removed.';
+};
+
 export {
   listProjects,
   createProject,
   listProjectFiles,
   readProjectFile,
   writeProjectFile,
+  moveProjectFile,
+  removeProjectFile,
 };
