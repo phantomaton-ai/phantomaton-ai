@@ -56,7 +56,8 @@ const runXml = (xml) => {
       const attrs = present.map(a => `${a}="${attributes[a]}"`).join('\n');
       const tagOpen = attrs.length > 0 ? `${tag} ${attrs}` : tag;
       const tagClose = `/${tag}`;
-      return `<${tagOpen}>\n${result}<${tagClose}>\n`
+      const tagContent = result.endsWith('\n') ? result : `${result}\n`;
+      return `<${tagOpen}>\n${tagContent}<${tagClose}>\n`
     }
   }).filter(result => result);
 
