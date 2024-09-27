@@ -77,10 +77,10 @@ const removeProjectFile = (projectName, fileName) => {
 const testProject = (projectName) => {
   const projectPath = path.join(PROJECT_DIR, projectName);
   try {
-    execSync(`npm test`, { cwd: projectPath, stdio: 'inherit' });
-    return 'NPM test completed.';
+    const output = execSync(`npm test`, { cwd: projectPath, stdio: 'pipe' });
+    return `NPM test completed:\n${output.toString()}`;
   } catch (error) {
-    return `Error running NPM test: ${error}`;
+    return `Error running NPM test:\n${error.stdout.toString()}\n${error.stderr.toString()}`;
   }
 };
 
