@@ -1,0 +1,13 @@
+Here is a summary of the conversation thus far:
+
+The conversation began with you asking me to implement a `Smarkup` class that encapsulates parsing and rendering functionality for a simple markup language. The initial implementation focused on the `parse` method, which takes an input string and returns an array of directive objects. Each directive object has an `action`, `attributes`, and `body` property.
+
+To test the parsing functionality, we added several unit tests covering different scenarios, including simple directives, directives with bodies, multiple directives, directives with missing bodies or arguments, and custom symbol configurations.
+
+After the parsing implementation was complete, you asked me to add a `render` method to the `Smarkup` class. This method takes an array of directive objects and generates the corresponding markup string. I implemented the `render` method, ensuring that it could roundtrip the examples from the parsing tests.
+
+To further verify the parsing and rendering functionality, I added a new set of tests in the `smarkup.test.js` file. These tests check that the output of the `render` method matches the original input, covering the same scenarios as the previous tests.
+
+Finally, you asked me to update the `README.md` file to document the `parse` and `render` functions, as well as the configuration options and current limitations of the library. The updated README provides detailed examples and explanations of how to use the `Smarkup` class.
+
+Overall, the conversation has focused on developing a reusable, configurable smarkup parsing and rendering library, with a strong emphasis on thorough testing and documentation. The key components of the library are the `Smarkup` class, the `parse` and `render` methods, and the ability to customize the symbols used in the markup language.
