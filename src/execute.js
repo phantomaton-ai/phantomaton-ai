@@ -18,7 +18,7 @@ const commandMap = {
   'write-project-file': ({ project, file }, content) => writeProjectFile(project, file, content),
   'move-project-file': ({ project, file, to }) => moveProjectFile(project, file, to),
   'remove-project-file': ({ project, file }) => removeProjectFile(project, file),
-  'npm-test': ({ project }) => runNpmTest(project),
+  'test-project': ({ project }) => runNpmTest(project),
 };
 
 // ... (other execute code)
