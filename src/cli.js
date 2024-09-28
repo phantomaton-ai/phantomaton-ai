@@ -37,13 +37,9 @@ const main = async () => {
 
   const saveSummary = newSummary => {
     fs.writeFileSync(conversation.summaryPath, newSummary);
-    summary = newSummary;
+    summary = newSummary || "(empty)";
   };
-
-  if (fs.existsSync(conversation.summaryPath)) {
-    summary = fs.readFileSync(conversation.summaryPath, 'utf-8') || "(no summary)";
-  }
-
+  
   if (action === '--fork') {
     const oldConversationId = conversation.conversationId;
     conversation = conversation.fork(actionParam);
@@ -55,6 +51,10 @@ const main = async () => {
     console.log(`Continuing conversation: ${conversation.conversationId}`);
   } else {
     console.log(`Starting new conversation: ${conversation.conversationId}`);
+  }
+
+  if (fs.existsSync(conversation.summaryPath)) {
+    summary = fs.readFileSync(conversation.summaryPath, 'utf-8') || "(no summary)";
   }
 
   while (true) {
@@ -83,7 +83,7 @@ const main = async () => {
       process.stdout.write('\n');
     }
     if (messages.length >= SUMMARIZATION_THRESHOLD && messages.length % SUMMARIZATION_THRESHOLD === 0) {
-      summarize(messages.slice(-MAX_CONVERSATION_LENGTH), summary).then(saveSummary);
+      summarize(messages.slice(-MAX_CONVERSATION_LENGTH), system).then(saveSummary);
     }
   }
 };
