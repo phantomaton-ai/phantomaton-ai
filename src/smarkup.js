@@ -7,16 +7,16 @@ const instance = smarkup({
       end: '⚡️'
     },
     attributes: {
-      start: '✨🌟⭐️',
-      separator: '✨💫✨',
-      end: '⭐️🌟✨'
+      start: '(',
+      separator: ',',
+      end: ')'
     },
     pair: {
-      separator: ' 🔮 '
+      separator: '='
     },
     body: {
-      start: '✨📜',
-      end: '📜✨'
+      start: '{',
+      end: '}'
     }
   }
 });
