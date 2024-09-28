@@ -9,7 +9,8 @@ const execute = (input) => {
 
     const results = directives.map(({ action, attributes, body }) => {
       const command = commandMap[action];
-      return command && command(attributes, body);
+      const result = command && command(attributes, body);
+      return result && smarkup.render([{ action, attributes, body: result }]);
     }).filter(result => result);
 
     return results.length < 1 ? '' : results.join('\n') + separator;
