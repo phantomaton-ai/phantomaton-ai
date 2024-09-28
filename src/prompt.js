@@ -17,34 +17,14 @@ const getSystemPrompt = (summary) => {
 
   // Append examples of the commands
   systemPrompt += '## Available Commands\n\n';
-  for (const { name, example } of commands) {
-    const directive = {
+  commands.forEach(command => {
+    systemPrompt += smarkup.render([{
       action: name,
       attributes: example.options || {},
-      body: example.body || ''
-    };
-    systemPrompt += smarkup({
-      symbols: {
-        directive: {
-          start: '🧙‍♂️ ',
-          end: ' 🔮'
-        },
-        arguments: {
-          start: '✨',
-          separator: ' 💫 ',
-          end: '✨'
-        },
-        pair: {
-          separator: ' ✨ '
-        },
-        body: {
-          start: '\n🔮 ',
-          end: ' 🔮\n'
-        }
-      }
-    }).render([directive]);
+      body: example.body
+    }]);
     systemPrompt += '\n';
-  }
+  });
 
   return systemPrompt;
 };
