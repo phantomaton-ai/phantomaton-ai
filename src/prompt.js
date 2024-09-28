@@ -17,7 +17,7 @@ const getSystemPrompt = (summary) => {
 
   // Append examples of the commands
   systemPrompt += '## Available Commands\n\n';
-  commands.forEach(command => {
+  commands.forEach(({ name, example }) => {
     systemPrompt += smarkup.render([{
       action: name,
       attributes: example.options || {},
