@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import smarkup from './smarkup.js';
 import { commands } from './commands.js';
 
 const getSystemPrompt = (summary) => {
@@ -17,17 +18,32 @@ const getSystemPrompt = (summary) => {
   // Append examples of the commands
   systemPrompt += '## Available Commands\n\n';
   for (const { name, example } of commands) {
-    systemPrompt += `### /[name](`;
-    if (example.options) {
-      systemPrompt += Object.entries(example.options)
-        .map(([key, value]) => `${key}:${value}`)
-        .join(', ');
-    }
-    systemPrompt += `) {\n`;
-    if (example.body) {
-      systemPrompt += `${example.body}\n`;
-    }
-    systemPrompt += `} [name]!\n\n`;
+    const directive = {
+      action: name,
+      attributes: example.options || {},
+      body: example.body || ''
+    };
+    systemPrompt += smarkup({
+      symbols: {
+        directive: {
+          start: '🧙‍♂️ ',
+          end: ' 🔮'
+        },
+        arguments: {
+          start: '✨',
+          separator: ' 💫 ',
+          end: '✨'
+        },
+        pair: {
+          separator: ' ✨ '
+        },
+        body: {
+          start: '\n🔮 ',
+          end: ' 🔮\n'
+        }
+      }
+    }).render([directive]);
+    systemPrompt += '\n';
   }
 
   return systemPrompt;
