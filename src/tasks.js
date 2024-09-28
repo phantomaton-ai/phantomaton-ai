@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import { Conversation } from './conversation.js';
 import { execute } from './execute.js';
 import { getResponse } from './api.js';
@@ -43,9 +45,7 @@ const runTask = async (conversation) => {
   }
 };
 
-const main = async () => {
-  // Create a new conversation for the task
-  const conversation = new Conversation();
+const main = async (conversation) => {
   await runTask(conversation);
 };
 

@@ -4,6 +4,7 @@ import path from 'path';
 
 class Conversation {
   constructor(conversationId) {
+    console.log(conversationId);
     conversationId = conversationId || uuidv4();
     this.conversationId = conversationId;
     this.conversationPath = path.join('data', 'conversations', `${conversationId}.json`);
