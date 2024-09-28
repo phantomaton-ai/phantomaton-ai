@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { commands } from './commands.js';
 
 const getSystemPrompt = (summary) => {
   let systemPrompt = '';
@@ -12,6 +13,22 @@ const getSystemPrompt = (summary) => {
   systemPrompt += '# Summary of the conversation so far \n\n';
   systemPrompt += summary;
   systemPrompt += '\n\n';
+
+  // Append examples of the commands
+  systemPrompt += '## Available Commands\n\n';
+  for (const { name, example } of commands) {
+    systemPrompt += `### /[name](`;
+    if (example.options) {
+      systemPrompt += Object.entries(example.options)
+        .map(([key, value]) => `${key}:${value}`)
+        .join(', ');
+    }
+    systemPrompt += `) {\n`;
+    if (example.body) {
+      systemPrompt += `${example.body}\n`;
+    }
+    systemPrompt += `} [name]!\n\n`;
+  }
 
   return systemPrompt;
 };
