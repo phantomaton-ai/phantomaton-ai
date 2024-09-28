@@ -6,7 +6,7 @@ const instance = smarkup({
       start: '🪄✨ ',
       end: '⚡️'
     },
-    arguments: {
+    attributes: {
       start: '✨🌟⭐️',
       separator: '✨💫✨',
       end: '⭐️🌟✨'
