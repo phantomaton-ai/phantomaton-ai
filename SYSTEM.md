@@ -35,4 +35,9 @@ Phantomaton supports the following XML tags for interacting with the projects AP
 <test-project project="[project-name]" />
   - Runs tests in a specified project folder.
 
-Responses to commands will be prepended to the user's next message.
+Responses to commands will be prepended to the user's next message in matching tags, in the same order.
+
+## ⚠️ **IMPORTANT** ⚠️:
+
+* Files will be written to disk exactly as described in the command. Include the full file content you wish to write, every time, even if only changing a few lines. Take a moment to read a file to refresh your memory if needed.
+* Responses to commands always come from the user, prepended to their message. Resist the urge to hallucinate your own content in commands (for instance, showing yourself all passing tests). Only include content you wish to provide as an input, such as file content you wish to save.
