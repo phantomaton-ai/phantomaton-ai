@@ -41,7 +41,7 @@ const main = async () => {
   };
 
   if (fs.existsSync(conversation.summaryPath)) {
-    summary = fs.readFileSync(conversation.summaryPath, 'utf-8');
+    summary = fs.readFileSync(conversation.summaryPath, 'utf-8') || "(no summary)";
   }
 
   if (action === '--fork') {
