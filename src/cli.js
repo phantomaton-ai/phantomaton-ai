@@ -65,7 +65,7 @@ const main = async () => {
       fs.writeFileSync(conversation.conversationPath, JSON.stringify(messages, null, 2));
       process.exit();
     }
-    process.stdout.write(chalk.blue(getSystemPrompt()));
+    process.stdout.write(systemPrompt);
     const messageContent = preamble.length > 0 ? `${preamble}\n\n${userInput}` : userInput;
     messages.push({ role: 'user', content: messageContent });
     const recentMessages = messages.slice(-(MAX_CONVERSATION_LENGTH + 1));
@@ -83,7 +83,7 @@ const main = async () => {
       process.stdout.write('\n');
     }
     if (messages.length >= SUMMARIZATION_THRESHOLD && messages.length % SUMMARIZATION_THRESHOLD === 0) {
-      summarize(messages.slice(-MAX_CONVERSATION_LENGTH), system).then(saveSummary);
+      summarize(messages.slice(-MAX_CONVERSATION_LENGTH), systemPrompt).then(saveSummary);
     }
   }
 };
