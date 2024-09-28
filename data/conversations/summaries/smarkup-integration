@@ -1,0 +1,11 @@
+Summarizing the conversation so far:
+
+This conversation began with a request to integrate the `smarkup` project from `phantomaton-ai` in place of the existing XML syntax. I reviewed the project files for both `smarkup` and `phantomaton-ai`, and the user provided the actual file listings when I requested them, rather than allowing me to speculate. 
+
+The user highlighted an issue where I had made assumptions about the file contents instead of waiting for the actual information. They emphasized the importance of strictly following the provided commands and guidelines, and not making any unsolicited assumptions or providing extra commentary. I acknowledged this feedback and revised my system prompt to better adhere to these principles going forward.
+
+The user then explained that `smarkup` has been added as a dependency to the `phantomaton-ai` project, and the task is to update the `src/execute.js` file to parse and run the smarkup directives instead of XML. Additionally, the `prompt.js` file needs to be updated with examples of the smarkup directives.
+
+The user indicated this task would likely take several turns of conversation, and instructed me to read the relevant files and make the necessary updates step-by-step, asking for clarification as needed. I expressed understanding of the task and my plan to review the `execute.js` file first before moving on to the `prompt.js` updates.
+
+Overall, the key points are: 1) integrating `smarkup` into `phantomaton-ai`, 2) updating `execute.js` to handle smarkup directives, 3) enhancing `prompt.js` with smarkup directive examples, and 4) strictly following the user's instructions without making any assumptions.
