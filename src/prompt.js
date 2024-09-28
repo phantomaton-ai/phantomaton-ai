@@ -13,28 +13,6 @@ const getSystemPrompt = (summary) => {
   systemPrompt += summary;
   systemPrompt += '\n\n';
 
-  // Append source code
-  systemPrompt += '# Source code \n\n';
-  
-  // Append the contents of index.js
-  systemPrompt += '## index.js\n\n';
-  systemPrompt += fs.readFileSync(path.join('index.js'), 'utf-8');
-  systemPrompt += '\n\n';
-
-  // Append the contents of package.json
-  systemPrompt += '## package.json\n\n';
-  systemPrompt += fs.readFileSync(path.join('package.json'), 'utf-8');
-  systemPrompt += '\n\n';
-
-  // Append the contents of all files in src/
-  systemPrompt += '## src/\n\n';
-  const srcFiles = fs.readdirSync(path.join('src'));
-  for (const file of srcFiles) {
-    systemPrompt += `### ${file}\n\n`;
-    systemPrompt += fs.readFileSync(path.join('src', file), 'utf-8');
-    systemPrompt += '\n\n';
-  }
-
   return systemPrompt;
 };
 

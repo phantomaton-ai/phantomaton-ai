@@ -2,8 +2,7 @@ import fetch from 'node-fetch';
 import path from 'path';
 import { readFileSync } from 'fs';
 
-const getResponse = async (messages) => {
-  const system = readFileSync(path.join(path.resolve(), 'SYSTEM.md'), 'utf-8');
+const getResponse = async (messages, system = '') => {
   const payload = { model: 'claude-3-haiku-20240307', max_tokens: 4096, messages, system };
   const headers = {
     Accept: 'application/json',

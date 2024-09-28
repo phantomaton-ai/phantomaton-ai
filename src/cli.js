@@ -6,6 +6,7 @@ import { getResponse } from './api.js';
 import summarize from './summarize.js';
 import { runXml } from './execute.js';
 import { Conversation } from './fork.js';
+import { getSystemPrompt } from './prompt.js';
 
 const MAX_CONVERSATION_TURNS = 20;
 const MAX_CONVERSATION_LENGTH = MAX_CONVERSATION_TURNS * 2;
@@ -58,6 +59,7 @@ const main = async () => {
 
   while (true) {
     const userInput = await promptUser('> ');
+    const systemPrompt = getSystemPrompt(summary);
     if (userInput.toLowerCase() === 'exit') {
       process.stdout.write('Farewell, foolish humans! 🤖\n');
       fs.writeFileSync(conversation.conversationPath, JSON.stringify(messages, null, 2));
@@ -67,7 +69,7 @@ const main = async () => {
     const messageContent = preamble.length > 0 ? `${preamble}\n\n${userInput}` : userInput;
     messages.push({ role: 'user', content: messageContent });
     const recentMessages = messages.slice(-(MAX_CONVERSATION_LENGTH + 1));
-    const { role, content } = await getResponse(recentMessages, summary);
+    const { role, content } = await getResponse(recentMessages, systemPrompt);
     process.stdout.write('\n');
     const texts = content.filter(({ type }) => type === 'text').map(({ text }) => text);
     const response = texts.join('\n\n---\n\n')
