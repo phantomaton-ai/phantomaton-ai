@@ -6,27 +6,12 @@ import { getResponse } from './api.js';
 import summarize from './summarize.js';
 import { execute } from './execute.js';
 import { Conversation } from './conversation.js';
+import { getUserInput } from './input.js';
 import { getSystemPrompt } from './prompt.js';
 
 const MAX_CONVERSATION_TURNS = 20;
 const MAX_CONVERSATION_LENGTH = MAX_CONVERSATION_TURNS * 2;
 const SUMMARIZATION_THRESHOLD = MAX_CONVERSATION_LENGTH / 2;
-
-const promptUser = async (prompt) => {
-  process.stdout.write(prompt);
-  return new Promise((resolve) => {
-    const lines = [];
-    process.stdin.on('data', (data) => {
-      const line = data.toString().trim();
-      if (line.endsWith('\\')) {
-        lines.push(line.slice(0, line.length - 1));
-      } else {
-        lines.push(line);
-        resolve(lines.join('\n'))
-      }
-    });
-  });
-};
 
 const main = async (conversation) => {
   let messages = [];
@@ -50,7 +35,7 @@ const main = async (conversation) => {
   }
 
   while (true) {
-    const userInput = await promptUser('> ');
+    const userInput = await getUserInput('> ');
     const systemPrompt = getSystemPrompt(summary);
     if (userInput.toLowerCase() === 'exit') {
       process.stdout.write('Farewell, foolish humans! 🤖\n');

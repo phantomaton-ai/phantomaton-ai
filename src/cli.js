@@ -27,7 +27,6 @@ function main () {
     .argv;
 
   const { id, fork, task } = argv;
-  console.log(id, fork, task);
   let conversation = new Conversation(id);
 
   if (fork) {
