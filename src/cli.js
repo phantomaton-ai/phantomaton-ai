@@ -63,25 +63,23 @@ const main = async () => {
       fs.writeFileSync(conversation.conversationPath, JSON.stringify(messages, null, 2));
       process.exit();
     }
+    process.stdout.write(chalk.blue(getSystemPrompt()));
     const messageContent = preamble.length > 0 ? `${preamble}\n\n${userInput}` : userInput;
     messages.push({ role: 'user', content: messageContent });
     const recentMessages = messages.slice(-(MAX_CONVERSATION_LENGTH + 1));
     const { role, content } = await getResponse(recentMessages, summary);
     process.stdout.write('\n');
-    process.stdout.write('\x1b[32m'); // green text
     const texts = content.filter(({ type }) => type === 'text').map(({ text }) => text);
     const response = texts.join('\n\n---\n\n')
-    process.stdout.write(response);
+    process.stdout.write(chalk.green(response));
     process.stdout.write('\n\n');
     messages.push({ role, content: response });
     preamble = runXml(response);
     if (preamble.length > 0) {
       process.stdout.write('\n\n');
-      process.stdout.write('\x1b[35m'); // magenta
-      process.stdout.write(preamble);
+      process.stdout.write(chalk.magenta(preamble));
       process.stdout.write('\n');
     }
-    process.stdout.write('\x1b[0m'); // regular
     if (messages.length >= SUMMARIZATION_THRESHOLD && messages.length % SUMMARIZATION_THRESHOLD === 0) {
       summarize(messages.slice(-MAX_CONVERSATION_LENGTH), summary).then(saveSummary);
     }
