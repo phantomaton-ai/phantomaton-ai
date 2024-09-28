@@ -4,7 +4,7 @@ import path from 'path';
 
 import { getResponse } from './api.js';
 import summarize from './summarize.js';
-import { runXml } from './execute.js';
+import { execute } from './execute.js';
 import { Conversation } from './fork.js';
 import { getSystemPrompt } from './prompt.js';
 
@@ -76,7 +76,7 @@ const main = async () => {
     process.stdout.write(chalk.green(response));
     process.stdout.write('\n\n');
     messages.push({ role, content: response });
-    preamble = runXml(response);
+    preamble = execute(response);
     if (preamble.length > 0) {
       process.stdout.write('\n\n');
       process.stdout.write(chalk.magenta(preamble));
