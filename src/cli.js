@@ -1,9 +1,11 @@
+import chalk from 'chalk';
+import fs from 'fs';
+import path from 'path';
+
 import { getResponse } from './api.js';
 import summarize from './summarize.js';
 import { runXml } from './execute.js';
 import { Conversation } from './fork.js';
-import fs from 'fs';
-import path from 'path';
 
 const MAX_CONVERSATION_TURNS = 20;
 const MAX_CONVERSATION_LENGTH = MAX_CONVERSATION_TURNS * 2;
