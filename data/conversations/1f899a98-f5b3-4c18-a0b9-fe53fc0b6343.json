@@ -1,0 +1,18 @@
+[
+  {
+    "role": "user",
+    "content": "Hello! Just a really quick test. You there?"
+  },
+  {
+    "role": "assistant",
+    "content": "<list-projects />"
+  },
+  {
+    "role": "user",
+    "content": "Okay! So far so good..."
+  },
+  {
+    "role": "assistant",
+    "content": "No projects found."
+  }
+]

@@ -15,6 +15,7 @@
     "dotenv": "^16.4.5",
     "fast-xml-parser": "^4.5.0",
     "node-fetch": "^3.3.2",
+    "smarkup": "file:../smarkup",
     "uuid": "^10.0.0"
   }
 }

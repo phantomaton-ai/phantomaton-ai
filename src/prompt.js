@@ -1,5 +1,7 @@
 import fs from 'fs';
 import path from 'path';
+import smarkup from './smarkup.js';
+import { commands } from './commands.js';
 
 const getSystemPrompt = (summary) => {
   let systemPrompt = '';
@@ -12,6 +14,17 @@ const getSystemPrompt = (summary) => {
   systemPrompt += '# Summary of the conversation so far \n\n';
   systemPrompt += summary;
   systemPrompt += '\n\n';
+
+  // Append examples of the commands
+  systemPrompt += '## Available Commands\n\n';
+  commands.forEach(({ name, example }) => {
+    systemPrompt += smarkup.render([{
+      action: name,
+      attributes: example.options || {},
+      body: example.body
+    }]);
+    systemPrompt += '\n';
+  });
 
   return systemPrompt;
 };
