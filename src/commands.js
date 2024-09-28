@@ -1,3 +1,14 @@
+import {
+  listProjects,
+  createProject,
+  listProjectFiles,
+  readProjectFile,
+  writeProjectFile,
+  moveProjectFile,
+  removeProjectFile,
+  testProject,
+} from './projects.js';
+
 const commands = [
   {
     name: 'listProjects',
@@ -80,4 +91,4 @@ const commandMap = commands.reduce((map, { name, command }) => {
   return map;
 }, {});
 
-export { commandMap };
+export { commands, commandMap };
