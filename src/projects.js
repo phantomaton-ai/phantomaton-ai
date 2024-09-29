@@ -25,7 +25,7 @@ const createProject = (projectName) => {
       ...GIT_IGNORE.map(file => `echo ${file} >> .gitignore`),
       'git add .gitignore package.json package-lock.json',
       'git commit -m "Updated by Phantomaton"'
-    ].forEach(command => execSync(command));
+    ].map(command => execSync(command, options));
     return [...outputs, 'Project created.'].join('\n\n');
   } catch (error) {
     return `Error creating project: ${error}`;
