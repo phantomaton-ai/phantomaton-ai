@@ -3,6 +3,7 @@ import path from 'path';
 import { execSync } from 'child_process';
 
 const PROJECT_DIR = 'data/projects';
+const GIT_IGNORE = ['node_modules']
 
 const listProjects = () => {
   const projects = fs.readdirSync(PROJECT_DIR);
@@ -14,11 +15,18 @@ const createProject = (projectName) => {
   console.log("Creating " + projectPath);
   fs.mkdirSync(projectPath, { recursive: true });
   try {
-    execSync(`git init ${projectPath}`);
-    execSync(`git -C ${projectPath} config --local user.name phantomaton`);
-    execSync(`git -C ${projectPath} config --local user.email 182378863+phantomaton-ai@users.noreply.github.com`);
-    execSync(`git -C ${projectPath} commit --allow-empty -m "Updated by Phantomaton"`);
-    return 'Project created.';
+    const options = { cwd: projectPath };
+    const outputs = [
+      'git init',
+      'git config --local user.name phantomaton',
+      'git config --local user.email 182378863+phantomaton-ai@users.noreply.github.com',
+      'npm init -y',
+      'npm i chai mocha',
+      ...GIT_IGNORE.map(file => `echo ${file} >> .gitignore`),
+      'git add .gitignore package.json package-lock.json',
+      'git commit -m "Updated by Phantomaton"'
+    ].map(command => execSync(command, options));
+    return [...outputs, 'Project created.'].join('\n\n');
   } catch (error) {
     return `Error creating project: ${error}`;
   }
