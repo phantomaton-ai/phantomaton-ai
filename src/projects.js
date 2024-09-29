@@ -3,6 +3,7 @@ import path from 'path';
 import { execSync } from 'child_process';
 
 const PROJECT_DIR = 'data/projects';
+const GIT_IGNORE = ['node_modules']
 
 const listProjects = () => {
   const projects = fs.readdirSync(PROJECT_DIR);
@@ -17,7 +18,9 @@ const createProject = (projectName) => {
     execSync(`git init ${projectPath}`);
     execSync(`git -C ${projectPath} config --local user.name phantomaton`);
     execSync(`git -C ${projectPath} config --local user.email 182378863+phantomaton-ai@users.noreply.github.com`);
-    execSync(`git -C ${projectPath} commit --allow-empty -m "Updated by Phantomaton"`);
+    execSync(`pushd ${projectPath}; npm init; npm i chai mocha; popd ${projectPath}`)
+    fs.writeFileSync(path.join(projectPath), '.gitignore'), GIT_IGNORE.join('\n'));
+    execSync(`git -C ${projectPath} commit -m "Updated by Phantomaton"`);
     return 'Project created.';
   } catch (error) {
     return `Error creating project: ${error}`;
