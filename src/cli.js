@@ -65,7 +65,7 @@ const main = async () => {
       fs.writeFileSync(conversation.conversationPath, JSON.stringify(messages, null, 2));
       process.exit();
     }
-    process.stdout.write(systemPrompt);
+    process.stdout.write(chalk.blue(systemPrompt));
     const messageContent = preamble.length > 0 ? `${preamble}\n\n${userInput}` : userInput;
     messages.push({ role: 'user', content: messageContent });
     const recentMessages = messages.slice(-(MAX_CONVERSATION_LENGTH + 1));
