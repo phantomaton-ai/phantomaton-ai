@@ -33,7 +33,7 @@ const runTask = async (conversation) => {
     messages = JSON.parse(fs.readFileSync(conversation.conversationPath, 'utf-8'));
   }
 
-  messages.push({ role: 'user', message: task });
+  messages.push({ role: 'user', content: task });
   const startTime = Date.now();
   while (Date.now() - startTime < TASK_DURATION) {
     const systemPrompt = getSystemPrompt(summary) + `# Task\n\n${task}\n`;
@@ -46,7 +46,7 @@ const runTask = async (conversation) => {
       summarize(messages.slice(-10), summary).then(saveSummary);
     }
     const nextContent = preamble.length > 0 ? preamble : reminder;
-    messages.push({ role: 'user', message: nextContent });
+    messages.push({ role: 'user', content: nextContent });
     await new Promise(resolve => setTimeout(resolve, TASK_INTERVAL));
   }
 };
