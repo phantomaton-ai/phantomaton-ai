@@ -19,7 +19,7 @@ const createProject = (projectName) => {
     execSync(`git -C ${projectPath} config --local user.name phantomaton`);
     execSync(`git -C ${projectPath} config --local user.email 182378863+phantomaton-ai@users.noreply.github.com`);
     execSync(`pushd ${projectPath}; npm init; npm i chai mocha; popd ${projectPath}`)
-    fs.writeFileSync(path.join(projectPath), '.gitignore'), GIT_IGNORE.join('\n'));
+    fs.writeFileSync(path.join(projectPath, '.gitignore'), GIT_IGNORE.join('\n'));
     execSync(`git -C ${projectPath} commit -m "Updated by Phantomaton"`);
     return 'Project created.';
   } catch (error) {
