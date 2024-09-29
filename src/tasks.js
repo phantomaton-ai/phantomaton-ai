@@ -37,16 +37,20 @@ const runTask = async (conversation) => {
   const startTime = Date.now();
   while (Date.now() - startTime < TASK_DURATION) {
     const systemPrompt = getSystemPrompt(summary) + `# Task\n\n${task}\n`;
+    console.log(chalk.blue(systemPrompt));
     const { role, content } = await getResponse(messages, systemPrompt);
     const texts = content.filter(({ type }) => type === 'text').map(({ text }) => text);
     const response = texts.join('\n\n---\n\n');
+    console.log(chalk.green(response));
     preamble = execute(response);
     messages.push({ role, content: response });
     if (messages.length >= 10 && messages.length % 10 === 0) {
       summarize(messages.slice(-10), summary).then(saveSummary);
     }
     const nextContent = preamble.length > 0 ? preamble : reminder;
+    console.log(chalk.magenta(nextContent));
     messages.push({ role: 'user', content: nextContent });
+    fs.writeFileSync(conversation.conversationPath, JSON.stringify(messages, null, 2));
     await new Promise(resolve => setTimeout(resolve, TASK_INTERVAL));
   }
 };
