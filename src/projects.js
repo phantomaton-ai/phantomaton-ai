@@ -15,14 +15,18 @@ const createProject = (projectName) => {
   console.log("Creating " + projectPath);
   fs.mkdirSync(projectPath, { recursive: true });
   try {
-    execSync(`git init ${projectPath}`);
-    execSync(`git -C ${projectPath} config --local user.name phantomaton`);
-    execSync(`git -C ${projectPath} config --local user.email 182378863+phantomaton-ai@users.noreply.github.com`);
-    execSync(`pushd ${projectPath}; npm init; npm i chai mocha; popd ${projectPath}`)
-    fs.writeFileSync(path.join(projectPath, '.gitignore'), GIT_IGNORE.join('\n'));
-    execSync(`git -C ${projectPath} add .gitignore package.json package-lock.json`);
-    execSync(`git -C ${projectPath} commit -m "Updated by Phantomaton"`);
-    return 'Project created.';
+    const options = { cwd: projectPath };
+    const outputs = [
+      'git init',
+      'git config --local user.name phantomaton',
+      'git config --local user.email 182378863+phantomaton-ai@users.noreply.github.com',
+      'npm init -y',
+      'npm i chai mocha',
+      ...GIT_IGNORE.map(file => `echo ${file} >> .gitignore`),
+      'git add .gitignore package.json package-lock.json',
+      'git commit -m "Updated by Phantomaton"'
+    ].forEach(command => execSync(command));
+    return [...outputs, 'Project created.'].join('\n\n');
   } catch (error) {
     return `Error creating project: ${error}`;
   }
