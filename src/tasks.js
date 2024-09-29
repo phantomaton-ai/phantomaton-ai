@@ -1,6 +1,8 @@
+import chalk from 'chalk';
 import fs from 'fs';
 
 import { getResponse } from './api.js';
+import { commands } from './commands.js';
 import { Conversation } from './conversation.js';
 import { execute } from './execute.js';
 import { getUserInput } from './input.js';
@@ -12,7 +14,17 @@ const TASK_DURATION = 1800000; // 30 minutes
 
 const runTask = async (conversation) => {
   const task = await getUserInput('> ');
-  const reminder = `No commands executed. Reminder, your task: ${task}`;
+  const reminder = `No commands executed. Reminder, your task:\n\n ${task}\n\n` + 
+    'Remember, available commands and their syntax:\n\n' +
+    commands.map(({ name, example }) => {
+      smarkup.render([{
+        action: name,
+        attributes: example.options || {},
+        body: example.body
+      }]);
+      systemPrompt += '\n';
+    }).join('n');
+
   let messages = [];
   let summary = "(no summary)";
   let preamble = '';
