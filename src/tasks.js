@@ -36,7 +36,6 @@ const runTask = async (conversation) => {
   messages.push({ role: 'user', message: task });
   const startTime = Date.now();
   while (Date.now() - startTime < TASK_DURATION) {
-    messages.push({ role, content: response });
     const systemPrompt = getSystemPrompt(summary) + `# Task\n\n${task}\n`;
     const { role, content } = await getResponse(messages, systemPrompt);
     const texts = content.filter(({ type }) => type === 'text').map(({ text }) => text);
