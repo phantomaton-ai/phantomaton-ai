@@ -11,9 +11,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chai": "^5.1.1",
     "chalk": "^5.3.0",
     "dotenv": "^16.4.5",
     "fast-xml-parser": "^4.5.0",
+    "mocha": "^10.7.3",
     "node-fetch": "^3.3.2",
     "smarkup": "file:../smarkup",
     "uuid": "^10.0.0",
