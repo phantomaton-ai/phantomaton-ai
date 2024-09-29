@@ -11,7 +11,7 @@ const TASK_INTERVAL = 60000; // 60 seconds
 const TASK_DURATION = 1800000; // 30 minutes
 
 const runTask = async (conversation) => {
-  const task = getUserInput('> ');
+  const task = await getUserInput('> ');
   const reminder = `No commands executed. Reminder, your task: ${task}`;
   let messages = [];
   let summary = "(no summary)";
