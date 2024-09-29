@@ -7,6 +7,7 @@ import { Conversation } from './conversation.js';
 import { execute } from './execute.js';
 import { getUserInput } from './input.js';
 import { getSystemPrompt } from './prompt.js';
+import smarkup from './smarkup.js';
 import summarize from './summarize.js';
 
 const TASK_INTERVAL = 60000; // 60 seconds
