@@ -39,7 +39,6 @@ const main = async (conversation) => {
     const systemPrompt = getSystemPrompt(summary);
     if (userInput.toLowerCase() === 'exit') {
       process.stdout.write('Farewell, foolish humans! 🤖\n');
-      fs.writeFileSync(conversation.conversationPath, JSON.stringify(messages, null, 2));
       process.exit();
     }
     process.stdout.write(chalk.blue(systemPrompt));
@@ -53,6 +52,7 @@ const main = async (conversation) => {
     process.stdout.write(chalk.green(response));
     process.stdout.write('\n\n');
     messages.push({ role, content: response });
+    fs.writeFileSync(conversation.conversationPath, JSON.stringify(messages, null, 2));
     preamble = execute(response);
     if (preamble.length > 0) {
       process.stdout.write('\n\n');
