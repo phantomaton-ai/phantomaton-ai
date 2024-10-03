@@ -18,17 +18,15 @@ const getSystemPrompt = (summary) => {
   // Append examples and descriptions of the commands
   systemPrompt += '## Available Commands\n\n';
   commands.forEach(({ name, example, description }) => {
-    systemPrompt += `🪄✨ ${name}(`;
-    if (example.options) {
-      systemPrompt += `${Object.keys(example.options).map(key => `${key}=${example.options[key]}`).join(',')}`;
-    }
-    systemPrompt += `) - ${description}\n`;
+    systemPrompt += `### \`${name}\`\n\n`;
+    systemPrompt += `${description}\n\n`;
+    systemPrompt += '*Example:*\n\n';
     systemPrompt += smarkup.render([{
       action: name,
       attributes: example.options || {},
       body: example.body
     }]);
-    systemPrompt += '\n';
+    systemPrompt += '\n\n';
   });
 
   return systemPrompt;
