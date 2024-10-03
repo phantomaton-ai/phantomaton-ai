@@ -17,14 +17,11 @@ const runTask = async (conversation) => {
   const task = await getUserInput('> ');
   const reminder = `No commands executed. Reminder, your task:\n\n ${task}\n\n` + 
     'Remember, available commands and their syntax:\n\n' +
-    commands.map(({ name, example }) => {
-      smarkup.render([{
-        action: name,
-        attributes: example.options || {},
-        body: example.body
-      }]);
-      systemPrompt += '\n';
-    }).join('n');
+    commands.map(({ name, example }) => smarkup.render([{
+      action: name,
+      attributes: example.options || {},
+      body: example.body
+    }])).join('n');
 
   let messages = [];
   let summary = "(no summary)";
