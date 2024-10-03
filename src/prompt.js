@@ -15,9 +15,14 @@ const getSystemPrompt = (summary) => {
   systemPrompt += summary;
   systemPrompt += '\n\n';
 
-  // Append examples of the commands
+  // Append examples and descriptions of the commands
   systemPrompt += '## Available Commands\n\n';
-  commands.forEach(({ name, example }) => {
+  commands.forEach(({ name, example, description }) => {
+    systemPrompt += `🪄✨ ${name}(`;
+    if (example.options) {
+      systemPrompt += `${Object.keys(example.options).map(key => `${key}=${example.options[key]}`).join(',')}`;
+    }
+    systemPrompt += `) - ${description}\n`;
     systemPrompt += smarkup.render([{
       action: name,
       attributes: example.options || {},
