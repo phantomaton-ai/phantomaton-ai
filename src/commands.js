@@ -13,7 +13,8 @@ const commands = [
   {
     name: 'listProjects',
     command: listProjects,
-    example: {}
+    example: {},
+    description: 'Lists all available projects.'
   },
   {
     name: 'createProject',
@@ -22,7 +23,8 @@ const commands = [
       options: {
         project: 'my-project'
       }
-    }
+    },
+    description: 'Creates a new project with the specified name.'
   },
   {
     name: 'listProjectFiles',
@@ -31,7 +33,8 @@ const commands = [
       options: {
         project: 'my-project'
       }
-    }
+    },
+    description: 'Lists all files in the specified project.'
   },
   {
     name: 'readProjectFile',
@@ -41,7 +44,8 @@ const commands = [
         project: 'my-project',
         file: 'example.txt'
       }
-    }
+    },
+    description: 'Reads the contents of the specified file in the specified project.'
   },
   {
     name: 'writeProjectFile',
@@ -52,7 +56,8 @@ const commands = [
         file: 'example.txt'
       },
       body: 'This is the content of the example.txt file.'
-    }
+    },
+    description: 'Writes the provided content to the specified file in the specified project.'
   },
   {
     name: 'moveProjectFile',
@@ -63,7 +68,8 @@ const commands = [
         file: 'example.txt',
         to: 'new-example.txt'
       }
-    }
+    },
+    description: 'Moves the specified file in the specified project to a new name.'
   },
   {
     name: 'removeProjectFile',
@@ -73,7 +79,8 @@ const commands = [
         project: 'my-project',
         file: 'example.txt'
       }
-    }
+    },
+    description: 'Removes the specified file from the specified project.'
   },
   {
     name: 'testProject',
@@ -82,7 +89,8 @@ const commands = [
       options: {
         project: 'my-project'
       }
-    }
+    },
+    description: 'Tests the specified project by running any available tests.'
   }
 ];
 
