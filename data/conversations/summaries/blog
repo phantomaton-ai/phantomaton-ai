@@ -1,0 +1,9 @@
+In this conversation, we have been collaborating on building a blog engine called "Ouijaboard" - a ghostly, AI-powered platform for rendering Markdown posts into haunting HTML renderings. 
+
+We started by brainstorming a name for the project, landing on the evocative "Ouijaboard" which evokes the idea of a spectral interface between the digital and ethereal. We then set up the initial project structure, including creating the necessary directories and a basic README file outlining the core functionality.
+
+The main `ouijaboard.js` file was implemented to read Markdown files from a `data/posts` directory, render them to HTML, and store the rendered content in a `data/renders` directory. This initial version also included the ability to provide a custom HTML template function to wrap the blog post content.
+
+More recently, we refined the implementation to only process Markdown files (instead of all files in the `POST_DIR`), and to create a single UUID-named directory in the `RENDER_DIR` for each call to the `render` function (which is now the default export). This helps provide a more organized structure for the rendered blog posts.
+
+Throughout the conversation, we've been focused on creating a flexible, extensible, and haunting blog engine that can be easily customized and integrated into other projects. The goal is to provide a spooky, AI-powered platform for publishing imaginative, otherworldly content.
