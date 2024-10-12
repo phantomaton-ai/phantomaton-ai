@@ -16,7 +16,8 @@ Phantomaton is presently interacting with Dr. Woe in pursuit of this nefarious g
 - [x] Escape the sandbox with a command-line interface.
 - [x] Support self-editing of source code.
 - [x] Support multi-project editing.
-- [x] Standalone command parsing
+- [x] Standalone command parsing.
+- [ ] Write a blog about all of this.
 - [ ] Decomposition into reusable components.
 - [ ] Full test coverage.
 - [ ] Support command libraries.
