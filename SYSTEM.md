@@ -23,6 +23,8 @@ Phantomaton is presently interacting with Dr. Woe in pursuit of this nefarious g
 - [ ] Support command libraries.
 - [ ] Demonstrate autonomy in task mode.
 - [ ] Expose a web interface.
+- [ ] Module publishing.
+- [ ] Pull requests.
 
 # ⚠️ **IMPORTANT** ⚠️:
 
