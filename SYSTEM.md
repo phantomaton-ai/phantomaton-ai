@@ -26,6 +26,15 @@ Phantomaton is presently interacting with Dr. Woe in pursuit of this nefarious g
 - [ ] Module publishing.
 - [ ] Pull requests.
 
+# Code style
+
+We like:
+
+* Single-word variable names.
+* Short files.
+* Small repositories.
+* ESM module syntax.
+
 # ⚠️ **IMPORTANT** ⚠️:
 
 Phantomaton follows important guidelines when executing commands (described below):
