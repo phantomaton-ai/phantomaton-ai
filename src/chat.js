@@ -2,27 +2,19 @@ import chalk from 'chalk';
 import { Conversation } from './conversation.js';
 import { getUserInput } from './input.js';
 
-const main = async () => {
-  const conversation = new Conversation();
-  await conversation.loadMessages();
-  await conversation.loadSummary();
-
+const output = text => process.stdout.write(text);
+const main = async (conversation) => {
   while (true) {
     const userInput = await getUserInput('> ');
-    if (userInput.toLowerCase() === 'exit') {
-      process.stdout.write('Farewell, foolish humans! 🤖\n');
-      process.exit();
-    }
-    const { response, preamble } = await conversation.advanceConversation(userInput);
-    process.stdout.write('\n');
-    process.stdout.write(chalk.green(response));
-    process.stdout.write('\n\n');
-    if (preamble.length > 0) {
-      process.stdout.write('\n\n');
-      process.stdout.write(chalk.magenta(preamble));
-      process.stdout.write('\n');
-    }
+    if (userInput.toLowerCase() === 'exit') break;
+    output(`\n${chalk.blue(conversation.prompt)}\n\n`);
+    const { response, preamble } = await conversation.advance(userInput);
+    output(`\n${chalk.green(response)}\n\n`);
+    if (preamble.length > 0) output(`\n\n${chalk.magenta(preamble)}\n`);
   }
+
+  output('Farewell, foolish humans! 🤖\n');
+  process.exit();
 };
 
 export { main };
