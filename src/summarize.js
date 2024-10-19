@@ -1,4 +1,4 @@
-import { getResponse } from './api.js';
+import api from './api.js';
 
 export default async function summarize(messages, system) {
   const summarizationRequest = { role: 'user', content: `
@@ -10,7 +10,7 @@ export default async function summarize(messages, system) {
   avoid extraneous commentary and omit formatting such of headers. You will be speaking to 
   yourself, so maintain an appropriately-informative tone.
   ` };
-  const { role, content } = await getResponse([...messages, summarizationRequest], system);
+  const { role, content } = await api.converse([...messages, summarizationRequest], system);
   const texts = content.filter(({ type }) => type === 'text').map(({ text }) => text);
   return texts.join('\n');
 }

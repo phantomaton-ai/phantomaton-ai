@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import fs from 'fs';
 import path from 'path';
-import { getResponse } from './api.js';
+import api from './api.js';
 import { execute } from './execute.js';
 import { getSystemPrompt } from './prompt.js';
 import summarize from './summarize.js';
@@ -28,17 +28,17 @@ class Conversation {
     fs.writeFileSync(this.summaryPath, this.summary);
   }
 
-  resummarize() {
+  async resummarize() {
     if (this.messages.length < SUMMARIZATION_THRESHOLD) return;
     if (this.messages.length % SUMMARIZATION_THRESHOLD !== 0) return;
-    this.summary = summarize(this.messages.slice(-MAX_CONVERSATION_LENGTH), this.prompt);;
+    this.summary = await summarize(this.messages.slice(-MAX_CONVERSATION_LENGTH), this.prompt);;
     this.prompt = getSystemPrompt(this.summary);
-    this.save();
+    fs.writeFileSync(this.summaryPath, this.summary);
   }
 
   async advance(message) {
     this.messages.push({ role: 'user', content: message });
-    const { role, content } = await getResponse(this.messages, this.prompt);
+    const { role, content } = await api.converse(this.messages, this.prompt);
     const texts = content.filter(({ type }) => type === 'text').map(({ text }) => text);
     const response = texts.join('\n\n---\n\n');
     const preamble = execute(response);
