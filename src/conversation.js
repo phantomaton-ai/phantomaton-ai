@@ -10,6 +10,28 @@ class Conversation {
     this.summaryPath = path.join('data', 'conversations', 'summaries', conversationId);
   }
 
+  async loadMessages() {
+    if (fs.existsSync(this.conversationPath)) {
+      return JSON.parse(fs.readFileSync(this.conversationPath, 'utf-8'));
+    }
+    return [];
+  }
+
+  async saveMessages(messages) {
+    await fs.writeFileSync(this.conversationPath, JSON.stringify(messages, null, 2));
+  }
+
+  async loadSummary() {
+    if (fs.existsSync(this.summaryPath)) {
+      return fs.readFileSync(this.summaryPath, 'utf-8') || "(no summary)";
+    }
+    return "(no summary)";
+  }
+
+  async saveSummary(summary) {
+    await fs.writeFileSync(this.summaryPath, summary);
+  }
+
   fork(newConversationId) {
     const newConversation = new Conversation(newConversationId);
     if (fs.existsSync(this.conversationPath)) {
