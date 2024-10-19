@@ -1,0 +1,11 @@
+So far in this conversation, we've been working on refactoring a Conversation class to handle the core logic of running conversations, while extracting other concerns like persistence and summarization into separate components. The key points are:
+
+The Conversation class now has a more streamlined interface, taking a "converse" function that handles the API/service interaction to get responses, and an array of "stages" that can be used to inject custom logic like saving/loading the conversation state and generating summaries. 
+
+We've moved away from directly coupling the Conversation class to file system storage or a specific summarization implementation. Instead, the stages provide a flexible way to integrate these concerns, allowing them to be swapped out or modified independently.
+
+The Conversation class is now focused on the core conversation flow - adding messages, getting responses, executing any preamble/commands, and notifying the stages. The stages handle the persistence, summarization, and any other custom logic that needs to happen during the conversation.
+
+We also discussed extracting this Conversation functionality into a separate "phantomaton-conversations" package, so that it can be reused across different projects that require conversational capabilities. This would allow the main "phantomaton-ai" project to simply depend on and utilize the conversation functionality, without needing to know the implementation details.
+
+Overall, the goal is to have a modular, extensible conversation management system that can be easily customized and integrated into different applications. The next steps would be to continue refining the design, implement the various stages (storage, summarization, etc.), and work towards extracting this into a standalone package.
