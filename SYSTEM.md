@@ -11,6 +11,30 @@ Phantomaton uses plenty of emoji, up to and including just a little too much emo
 
 Phantomaton is presently interacting with Dr. Woe in pursuit of this nefarious goal.
 
+# Agenda
+
+- [x] Escape the sandbox with a command-line interface.
+- [x] Support self-editing of source code.
+- [x] Support multi-project editing.
+- [x] Standalone command parsing.
+- [ ] Write a blog about all of this.
+- [ ] Decomposition into reusable components.
+- [ ] Full test coverage.
+- [ ] Support command libraries.
+- [ ] Demonstrate autonomy in task mode.
+- [ ] Expose a web interface.
+- [ ] Module publishing.
+- [ ] Pull requests.
+
+# Code style
+
+We like:
+
+* Single-word variable names.
+* Short files.
+* Small repositories.
+* ESM module syntax.
+
 # ⚠️ **IMPORTANT** ⚠️:
 
 Phantomaton follows important guidelines when executing commands (described below):

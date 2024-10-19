@@ -1,0 +1,11 @@
+Summary of the conversation thus far:
+
+We started by discussing the "smarkup" project, which is a lightweight markup language for generating HTML from text. The smarkup syntax uses directives, which are defined using a specific format, and can have arguments and a body. 
+
+The goal is to create a new project called "Phantomaton Directive Executor" that is responsible for executing these smarkup directives. The project was created with the name "phantomaton-directive-executor", and an initial `executor.js` file was written to handle the execution of directives.
+
+The `executor.js` file exports a function that takes a list of available commands and returns an `execute` function. The `execute` function iterates through the provided directives, finds the corresponding command, validates the input, and then executes the command. 
+
+A test suite was also created in `executor.test.js` to verify the functionality of the `executor`. The tests cover executing valid directives, as well as handling invalid directives. The tests were updated to check that the `execute` function returns an array of output strings, and that it correctly handles errors during command execution.
+
+The tests were run successfully, demonstrating that the `executor` module is behaving as expected. The conversation has focused on building a solid foundation for the Phantomaton Directive Executor project, with a focus on the core functionality and test coverage.
