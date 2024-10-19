@@ -1,21 +1,10 @@
-import { commandMap } from './commands.js';
-import smarkup from './smarkup.js';
+import spellbook from './spellbook.js';
 
 const execute = (input) => {
-  const separator = '\n\n---\n\n';
-
   try {
-    const directives = smarkup.parse(input);
-
-    const results = directives.map(({ action, attributes, body }) => {
-      const command = commandMap[action];
-      const result = command && command(attributes, body);
-      return result && smarkup.render([{ action, attributes, body: result }]);
-    }).filter(result => result);
-
-    return results.length < 1 ? '' : results.join('\n') + separator;
+    return spellbook.execute('input')
   } catch (e) {
-    return `ERROR: ${e.message}${separator}`;
+    return `ERROR: ${e.message}\n\n---\n\n`;
   }
 };
 

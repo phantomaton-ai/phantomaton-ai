@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import smarkup from './smarkup.js';
-import { commands } from './commands.js';
+import spellbook from './spellbook.js';
 
 const getSystemPrompt = (summary) => {
   let systemPrompt = '';
@@ -16,18 +16,8 @@ const getSystemPrompt = (summary) => {
   systemPrompt += '\n\n';
 
   // Append examples and descriptions of the commands
-  systemPrompt += '## Available Commands\n\n';
-  commands.forEach(({ name, example, description }) => {
-    systemPrompt += `### \`${name}\`\n\n`;
-    systemPrompt += `${description}\n\n`;
-    systemPrompt += '*Example:*\n\n';
-    systemPrompt += smarkup.render([{
-      action: name,
-      attributes: example.options || {},
-      body: example.body
-    }]);
-    systemPrompt += '\n\n';
-  });
+  systemPrompt += '# Available Commands\n\n';
+  systemPrompt += spellbook.document();
 
   return systemPrompt;
 };

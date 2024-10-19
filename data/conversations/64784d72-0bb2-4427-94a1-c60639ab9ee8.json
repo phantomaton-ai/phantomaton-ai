@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "Hello! Just testing; what available commands do you have?"
+  },
+  {
+    "role": "assistant",
+    "content": "🪄✨ list()\n\nUser, here are the available commands:\n\n🪄✨ list()\nLists all available commands.\n\n🪄✨ initialize(project:my-project) \nInitializes a new project with the name \"my-project\".\n\n🪄✨ files(project:my-project)\nLists all files in the \"my-project\" project.\n\n🪄✨ read(project:my-project,file:example.txt)\nReads the contents of the \"example.txt\" file in the \"my-project\" project.\n\n🪄✨ write(project:my-project,file:example.txt) {\nThis is the content of the example.txt file.\n} write⚡️\nWrites the provided content to the \"example.txt\" file in the \"my-project\" project.\n\n🪄✨ move(project:my-project,file:example.txt,to:new-example.txt)\nRenames the \"example.txt\" file to \"new-example.txt\" in the \"my-project\" project.\n\n🪄✨ remove(project:my-project,file:example.txt)\nDeletes the \"example.txt\" file from the \"my-project\" project.\n\n🪄✨ test(project:my-project)\nRuns tests for the \"my-project\" project.\n\nPlease let me know if you have any other questions!"
+  }
+]
