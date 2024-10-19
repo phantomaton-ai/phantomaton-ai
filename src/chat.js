@@ -1,38 +1,20 @@
 import chalk from 'chalk';
-import fs from 'fs';
-import path from 'path';
-
-import { getResponse } from './api.js';
-import summarize from './summarize.js';
-import { execute } from './execute.js';
 import { Conversation } from './conversation.js';
-import { getUserInput } from './input.js';
 import { getSystemPrompt } from './prompt.js';
+import { getResponse } from './api.js';
+import { execute } from './execute.js';
+import summarize from './summarize.js';
+import { getUserInput } from './input.js';
 
 const MAX_CONVERSATION_TURNS = 20;
 const MAX_CONVERSATION_LENGTH = MAX_CONVERSATION_TURNS * 2;
 const SUMMARIZATION_THRESHOLD = MAX_CONVERSATION_LENGTH / 2;
 
-const main = async (conversation) => {
-  let messages = [];
-  let summary = "(no summary)";
+const main = async () => {
+  const conversation = new Conversation();
+  let messages = await conversation.loadMessages();
+  let summary = await conversation.loadSummary();
   let preamble = '';
-
-  const saveSummary = newSummary => {
-    fs.writeFileSync(conversation.summaryPath, newSummary);
-    summary = newSummary;
-  };
-
-  if (fs.existsSync(conversation.summaryPath)) {
-    summary = fs.readFileSync(conversation.summaryPath, 'utf-8') || "(no summary)";
-  }
-
-  if (fs.existsSync(conversation.conversationPath)) {
-    messages = JSON.parse(fs.readFileSync(conversation.conversationPath, 'utf-8'));
-    console.log(`Continuing conversation: ${conversation.conversationId}`);
-  } else {
-    console.log(`Starting new conversation: ${conversation.conversationId}`);
-  }
 
   while (true) {
     const userInput = await getUserInput('> ');
@@ -52,7 +34,7 @@ const main = async (conversation) => {
     process.stdout.write(chalk.green(response));
     process.stdout.write('\n\n');
     messages.push({ role, content: response });
-    fs.writeFileSync(conversation.conversationPath, JSON.stringify(messages, null, 2));
+    await conversation.saveMessages(messages);
     preamble = execute(response);
     if (preamble.length > 0) {
       process.stdout.write('\n\n');
@@ -60,7 +42,9 @@ const main = async (conversation) => {
       process.stdout.write('\n');
     }
     if (messages.length >= SUMMARIZATION_THRESHOLD && messages.length % SUMMARIZATION_THRESHOLD === 0) {
-      summarize(messages.slice(-MAX_CONVERSATION_LENGTH), systemPrompt).then(saveSummary);
+      const newSummary = await summarize(messages.slice(-MAX_CONVERSATION_LENGTH), systemPrompt);
+      await conversation.saveSummary(newSummary);
+      summary = newSummary;
     }
   }
 };
