@@ -17,7 +17,6 @@
     "fast-xml-parser": "^4.5.0",
     "mocha": "^10.7.3",
     "necronomicon": "^1.0.2",
-    "node-fetch": "^3.3.2",
     "phantomaton-anthropic": "^1.0.1",
     "phantomaton-projects": "^1.0.0",
     "uuid": "^10.0.0",
