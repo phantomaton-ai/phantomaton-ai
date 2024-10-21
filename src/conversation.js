@@ -48,7 +48,7 @@ class Conversation {
     this.messages.push({ role, content: response });
     this.resummarize();
     this.save();
-    return { response, preamble };
+    return { response, preamble: this.preamble };
   }
 
   fork(conversationId) {
