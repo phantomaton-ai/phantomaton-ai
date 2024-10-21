@@ -21,6 +21,7 @@ class Conversation {
     this.summary = fs.existsSync(this.summaryPath) ?
       fs.readFileSync(this.summaryPath, 'utf-8') : "(no summary)";
     this.prompt = getSystemPrompt(this.summary);
+    this.preamble = '';
   }
 
   save() {
@@ -37,11 +38,13 @@ class Conversation {
   }
 
   async advance(message) {
-    this.messages.push({ role: 'user', content: message });
+    const parts = [this.preamble, message].filter(part => part.length > 0);
+    const full = parts.join('\n\n---\n\n');
+    this.messages.push({ role: 'user', content: full });
     const { role, content } = await api.converse(this.messages, this.prompt);
     const texts = content.filter(({ type }) => type === 'text').map(({ text }) => text);
     const response = texts.join('\n\n---\n\n');
-    const preamble = execute(response);
+    this.preamble = execute(response);
     this.messages.push({ role, content: response });
     this.resummarize();
     this.save();
