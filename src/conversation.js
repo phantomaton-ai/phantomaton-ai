@@ -6,7 +6,7 @@ import { execute } from './execute.js';
 import { getSystemPrompt } from './prompt.js';
 import summarize from './summarize.js';
 
-const MAX_CONVERSATION_TURNS = 20;
+const MAX_CONVERSATION_TURNS = 12;
 const MAX_CONVERSATION_LENGTH = MAX_CONVERSATION_TURNS * 2;
 const SUMMARIZATION_THRESHOLD = MAX_CONVERSATION_LENGTH / 2;
 
