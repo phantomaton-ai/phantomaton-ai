@@ -1,0 +1,11 @@
+Summary of the conversation thus far:
+
+The conversation has focused on the development of two interrelated projects within the Phantomaton AI ecosystem: `sigil` and `hierophant`.
+
+The `sigil` project is a lightweight dependency injection framework for JavaScript applications. It allows for the registration and resolution of "providers" - specific implementations that can be swapped in and out. `sigil` aims to solve architectural problems around swapping out language models/APIs, exposing reusable abilities across agents, exposing reusable conversational experiences, and supporting multiple interfaces. It uses JavaScript `Symbol`s as type identifiers to avoid namespace collisions and provides a fluent API for defining providers, aggregators, and decorators.
+
+The `hierophant` project is the central dependency injection container for the Phantomaton AI. It builds upon the concepts introduced in `sigil`, providing a way to manage the various components and services used across Phantomaton's ecosystem. `hierophant` allows Phantomaton to easily swap out implementations, compose reusable abilities, support multiple interfaces, and extend the core functionality through a plugin system.
+
+The usage examples for both `sigil` and `hierophant` demonstrate how they can be used to register and resolve providers/components, leveraging the flexibility and modularity they provide. The README files for each project outline their purpose, core concepts, and usage.
+
+Overall, the discussion has focused on designing a robust and extensible dependency management system to support the development of the Phantomaton AI assistant, with `sigil` providing the underlying framework and `hierophant` serving as the central container for managing Phantomaton's components and services.
