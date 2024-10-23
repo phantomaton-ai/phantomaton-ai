@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "Hello! Please create a `phantomaton-conversations` project..."
+  },
+  {
+    "role": "assistant",
+    "content": "🪄✨ initialize(project:phantomaton-conversations)\nCreated new project 'phantomaton-conversations'."
+  }
+]
