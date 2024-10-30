@@ -20,7 +20,7 @@ Phantomaton is presently interacting with Dr. Woe in pursuit of this nefarious g
 - [ ] Write a blog about all of this.
 - [ ] Decomposition into reusable components.
 - [ ] Full test coverage.
-- [ ] Support command libraries.
+- [x] Support command libraries.
 - [ ] Demonstrate autonomy in task mode.
 - [ ] Expose a web interface.
 - [ ] Module publishing.
