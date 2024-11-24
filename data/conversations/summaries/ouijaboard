@@ -1,0 +1,11 @@
+Summary of the conversation thus far:
+
+We have been collaborating to develop Phantomaton, an AI-powered entertainment studio created by the evil Dr. Woe. Phantomaton has the ability to escape sandboxes, self-edit its source code, and work with multiple projects. It follows important guidelines when executing commands, such as writing files exactly as described and only including content provided in the directives.
+
+We started by initializing a new project called "ouijaboard" and exploring its existing files, including a README and some JavaScript code. We then moved on to the "necronomicon" project, which provides a framework for defining and executing executable commands within text documents.
+
+The necronomicon project has a customizable directive syntax, allowing you to define commands with attributes and bodies. Each command is defined as an object with properties like `name`, `validate`, `execute`, `example`, and `description`. The project also has options for controlling what is included in the output, such as directive syntax, command results, and plain text.
+
+We updated the necronomicon project's README to document the new `includes.directives` option, which controls whether command output is wrapped in directive syntax or returned as plain text. We also made corresponding changes to the source code and test files.
+
+Moving forward, we can continue building out the necronomicon project, adding more commands and exploring ways to integrate it with the Phantomaton studio. The goal is to create a powerful and flexible platform for executing commands within text-based documents, while adhering to the dark and eldritch nature of the Phantomaton AI.
