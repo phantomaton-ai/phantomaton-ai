@@ -1,0 +1,9 @@
+We have been working on developing a plugin ecosystem for Phantomaton, specifically focusing on creating an activities framework that can support multiple interfaces like CLI and web chat. The project involves creating `phantomaton-activities` as a core framework that will allow different input and output adapters to interact with conversation activities in a flexible, event-driven manner.
+
+We've explored the existing code in `phantomaton-cli`, particularly examining the `assistant.js`, `user.js`, and `start.js` files to understand the current implementation of a CLI-based conversation. The goal is to extract the core conversation logic into a more generic, adaptable system that can work across different interfaces without being tightly coupled to terminal-specific implementations.
+
+The proposed `Activity` class design includes a robust event-driven architecture with methods like `on()`, `_emit()`, and lifecycle hooks such as `start()`, `advance()`, and `end()`. This design allows for flexible extension and customization of conversation activities, with a particular focus on supporting both CLI and web-based chat interfaces through adaptable input and output mechanisms.
+
+Key design principles include maintaining a clean separation of concerns, providing extensible event listeners, and creating an abstract base class that can be subclassed for specific conversation types like chat. The `ChatActivity` subclass demonstrates how specific conversation logic can be implemented while still adhering to the generic activity interface.
+
+The next steps involve refining the `phantomaton-activities` framework, implementing the necessary input and output adapters, and ensuring that the system can seamlessly support both CLI and web interfaces with minimal duplication of core conversation logic. The ultimate goal is to create a flexible, modular system for building conversational AI experiences across different platforms and interfaces.
