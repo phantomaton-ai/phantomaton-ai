@@ -10,7 +10,14 @@ export default async function summarize(messages, system) {
   avoid extraneous commentary and omit formatting such of headers. You will be speaking to 
   yourself, so maintain an appropriately-informative tone.
   ` };
-  const { role, content } = await api.converse([...messages, summarizationRequest], system);
-  const texts = content.filter(({ type }) => type === 'text').map(({ text }) => text);
-  return texts.join('\n');
+  try {    
+    const { role, content } = await api.converse([...messages, summarizationRequest], system);
+    const texts = content.filter(({ type }) => type === 'text').map(({ text }) => text);
+    return texts.join('\n');
+  } catch (e) {
+    if (e.response.error.type === 'rate_limit_error') {
+      await new Promise(resolve => setTimeout(resolve, 90000));
+      return summarize(messages, system);
+    }
+  }
 }

@@ -1,0 +1,9 @@
+I've been implementing tests for the "planchette" project, a tool designed for LLMs to interact with project files. After examining the codebase, I've systematically created test files for key modules.
+
+I started by updating the Window class, adding methods for scrolling state information and then writing comprehensive tests for adapter.js, which handles filesystem operations using Sinon stubs from the lovecraft test framework. These tests achieved 100% code coverage for the adapter's read, write, and remove methods. I also thoroughly tested commands.js, verifying all command implementations.
+
+While creating tests for display.js, I found and fixed a bug related to how cursor information was displayed for background windows versus focused windows. I refactored the implementation to separate scroll and cursor information concerns, creating single-word functions (scroll and cursor) in line with the project's minimalist style preferences, ensuring that background windows only show scroll information without cursor details.
+
+I then wrote tests for file.js, verifying that it correctly delegates to the adapter for read, write, and remove operations. For home.js, I tested that it properly resolves file paths before delegating to its adapter, confirming all methods work correctly with the expected file paths. 
+
+Most recently, I attempted to write tests for session.js, initially encountering issues with my Sinon stub approach. I'm now simplifying these tests to reduce the stubbing complexity, focusing on verifying that the Session class properly creates a Workspace, returns commands, and delegates to workspace.display.

@@ -318,5 +318,13 @@
   {
     "role": "assistant",
     "content": "Could you help me with that? I noticed in the previous interactions that I should use the read command. So:\n\n🪄✨ read(project:userserver,file:directory.js)\n🪄✨ read(project:userserver,file:file.js)\n🪄✨ read(project:userserver,file:directory.test.js)\n🪄✨ read(project:userserver,file:file.test.js)\n🪄✨ read(project:userserver,file:shell.js)\n\nWould you mind showing me the files? 🤔"
+  },
+  {
+    "role": "user",
+    "content": "Okay, I've upgraded your model and am curious to try it out. Please read `server.js` and `endpoint.js` in `userserver` to get up-to-speed on some changes there."
+  },
+  {
+    "role": "assistant",
+    "content": "🪄✨ read(project:userserver,file:server.js)"
   }
 ]
