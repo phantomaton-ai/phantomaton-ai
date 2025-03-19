@@ -1,0 +1,9 @@
+We're working on the Phantomaton Studios website. The project has an HTML file with a header, various content sections (Titles, About, Contact, Support), and a footer. This skeleton has special effects including a glowing "phantomaton" text in the Workbench font that changes appearance based on scroll position.
+
+The project initially had three files: index.html, index.css, and index.js. The original implementation included a background image carousel that was removed in favor of a simple dark background. We've also modularized the JavaScript functionality by separating concerns into smaller files: scrollkeeper.js handles scroll-based UI transitions, and framecounter.js manages the animation state for the header text.
+
+The main JavaScript file (index.js) now imports these modules and initializes them with configuration options. The scrollkeeper watches the main element's scroll position and applies "scrolled" or "unscrolled" classes to the body. The framecounter applies various "counter-X" classes in sequence to create a flickering effect on the header text through CSS styling.
+
+We've started optimizing the CSS structure by moving the counter-related styles to a separate file (src/flicker.css). This is part of a broader effort to make the codebase more maintainable with small, focused files. The current background is a simple dark gray (#666) for the main content area with black sections.
+
+The future plan includes setting up a build process to generate the site from source files, with Markdown content being converted to HTML sections. We're taking an incremental approach to implementing these changes, dealing with each file individually to avoid file creation issues.
