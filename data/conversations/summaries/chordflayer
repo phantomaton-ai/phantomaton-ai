@@ -1,0 +1,9 @@
+The ChordFlayer project is developing a musical notation system with a human-readable format that can be parsed into a structured representation for machine processing. The notation uses symbols like `+` for simultaneous notes, `*` for multiplication, and `/` for division of duration, with octave indicators for pitch (e.g., "C4").
+
+I've been working on implementing a parser for this notation. After some initial iterations, we settled on a modular, object-oriented approach with small, focused components. The architecture includes parsers for different aspects of the notation: individual notes, modifiers, notations (note groups), melodies (sequences of notations), lyrics, sections, and a main parser to coordinate everything.
+
+Each component is designed to be self-contained with clear responsibilities. For example, the `Modifier` class handles duration adjustments with methods like `duration()`, the `Note` class parses note names and octaves, and the `Melody` class manages sequences of notations with timing. The `Section` class represents song sections with methods to add lyrics, vocals, and instruments.
+
+The parser flows from lines of notation text to an intermediate structure organized by sections, and finally to the output format that includes metadata, lyrics with timing information, and instrument tracks. Specific attention was given to mapping lyrics to vocal notes, handling both cases where there are more syllables than notes and vice versa.
+
+Throughout development, we've emphasized clean, maintainable code with clear interfaces between components. The parser handles various edge cases like section breaks, rests, and different notation styles, while maintaining a focus on producing a consistent output structure that captures all the musical information in the input.
