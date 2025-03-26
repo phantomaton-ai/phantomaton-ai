@@ -1,0 +1,9 @@
+We are working on a satirical film project called "The Properties of Matter" that presents itself as a serious physics documentary but gradually reveals its absurdity through increasingly bizarre misinterpretations of scientific concepts. The film uses a three-act structure with each act becoming progressively more detached from reality while maintaining a serious, authoritative tone.
+
+I created an initial OUTLINE.md file that was revised twice to better capture the vision: a film that begins with a compelling hook ("What is matter? What matters? What is the matter?") and ends with a mind-bending conclusion about reality being a simulation. The outline now features three acts with textbook-like titles that are slightly off: "Classical Mechanics and the Obstinacy of Objects," "Field Dynamics and the Reluctance of Space," and "Quantum Behaviors and the Inevitability of Simulation."
+
+The humor will come not from obvious jokes but from the contrast between the authoritative presentation and the increasingly nonsensical content. The documentary style will maintain high production values throughout, with sophisticated visuals and atmospheric music supporting the deadpan narration.
+
+The project is organized as a hierarchical structure of markdown files, with OUTLINE.md linking to individual act files (ACT_I.md, ACT_II.md, ACT_III.md), which will in turn link to scene files. This structure allows for iterative, breadth-first development of the content.
+
+We've established that the film should present misinterpretations that start plausibly but lead to absurd conclusions, name-drop historical physicists (attributing made-up theories to them), and maintain scientific-sounding terminology throughout. The final act will culminate in an obnoxiously confident argument for the "Quantum Computational Substrate Hypothesis" suggesting reality is a simulation.

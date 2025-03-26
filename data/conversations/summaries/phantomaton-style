@@ -1,0 +1,9 @@
+We initiated a collaborative project to develop a Phantomaton style guide, starting with creating a new project called `phantomaton-style`. The project began with initializing a Git repository and creating initial documentation files, with a focus on developing a concise, token-efficient guide for code development.
+
+The style guide evolved through iterative refinement, with key principles emerging around token efficiency, code structure, and development philosophy. We emphasized minimizing cognitive load, reducing computational costs, and creating lightweight, easily understandable code bases. The guide consistently prioritized brevity, with specific guidelines like keeping files under 100 lines of code and packages under 10-20 files.
+
+A significant focus was placed on well-factored code, drawing analogies from mathematical simplification. The approach seeks to decompose code in ways that naturally align with the problem space, promoting strong encapsulation, high cohesion, and clear separation of concerns. We preferred JavaScript over TypeScript to reduce token count and relied on inference and runtime checks.
+
+Naming conventions and coding principles were carefully considered, advocating for single-word variables, self-describing code, and a preference for functional programming paradigms. The documentation strategy emphasized using README files as primary interface documentation, with source files demonstrating usage through their inherent structure.
+
+The overall goal of the Phantomaton style guide is to create a flexible, lightweight approach to software development that minimizes complexity, maximizes clarity, and supports rapid iteration. The guide is designed to be language-agnostic while using JavaScript as a reference implementation, with a strong emphasis on creating code that is both efficient and comprehensible to both humans and AI systems.
