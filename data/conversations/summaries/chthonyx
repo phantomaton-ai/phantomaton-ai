@@ -1,0 +1,9 @@
+We are developing Chthonyx, a collectible card game with computational themes veiled beneath cosmic/underworld aesthetics. The game's name merges "chthonic" (underworld) with "onyx" (material boundaries), representing the struggle for dominion over cosmic forces.
+
+The core mechanic revolves around five cosmic domains: Abyss (recursion, depths), Ember (transformation, chaos), Tangle (patterns, growth), Void (entropy, absence), and Celestial (unity, transcendence). These domains have specific interactions: Ember consumes Tangle, Tangle ensnares Abyss, and Abyss extinguishes Ember.
+
+We defined five card types: Gateway (resource generators), Entity (persistent beings), Artifact (reality-shaping objects), Incantation (temporary effects), and Criterion (victory conditions). Victory can be achieved by reducing an opponent's Resonance to zero or by fulfilling all Criterion cards in play.
+
+The turn structure follows five phases: Alignment (draw/refresh), Manifestation (summon entities/artifacts), Influence (direct entities/incantations), Revelation (check victory), and Transition (end turn). Deck construction requires 40-80 cards, with at least 15 gateway cards recommended.
+
+A unique aspect of Chthonyx is "reality warping" - as the game progresses, the fundamental rules may change through Criterion cards, domain influences, and thinning boundaries between realms. This ensures no two games play exactly the same way, as the rules themselves evolve during play.
