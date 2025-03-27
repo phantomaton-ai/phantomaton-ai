@@ -18,6 +18,7 @@
     "mocha": "^10.7.3",
     "necronomicon": "^1.0.2",
     "phantomaton-anthropic": "^1.0.2",
+    "phantomaton-gemini": "^0.0.2",
     "phantomaton-projects": "^1.0.5",
     "uuid": "^10.0.0",
     "yargs": "^17.7.2"
