@@ -1,12 +1,20 @@
 import claude from 'phantomaton-anthropic';
 import gemini from 'phantomaton-gemini';
 
-export default gemini({
+const g = gemini({
   apiKey: process.env.GEMINI_API_KEY,
   model: 'gemini-2.5-pro-exp-03-25'
   // model: 'gemini-2.0-flash',
   // model: 'gemini-2.0-flash-lite'
 });
+
+export default {
+  async converse(turns, message) {
+    return g.converse(turns.map(turn => ({
+      ...turn, role: turn.role === 'assistant' ? 'model' : turn.role
+    })), message);
+  }
+};
 
 // export default claude({
 //   apiKey: process.env.ANTHROPIC_API_KEY,
