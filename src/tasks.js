@@ -2,8 +2,8 @@ import chalk from 'chalk';
 import { Conversation } from './conversation.js';
 import { getUserInput } from './input.js';
 
-const DELAY_MS = 30000;
-const TURNS = 60;
+const DELAY_MS = 5000;
+const TURNS = 120;
 
 const output = text => process.stdout.write(text);
 const main = async (conversation) => {
