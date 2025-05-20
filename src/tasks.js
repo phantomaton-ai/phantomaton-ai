@@ -1,9 +1,8 @@
 import chalk from 'chalk';
-import { Conversation } from './conversation.js';
 import { getUserInput } from './input.js';
 
-const DELAY_MS = 5000;
-const TURNS = 120;
+const DELAY_MS = 20000;
+const TURNS = 30;
 
 const output = text => process.stdout.write(text);
 const main = async (conversation) => {
@@ -13,7 +12,7 @@ const main = async (conversation) => {
     const message = t < 1 ?
       userInput :
       `(you are working in an automated environment; please continue until task is complete, you have ${TURNS - t} turns remaining.)`;
-    await new Promise(r => setTimeout(r, DELAY_MS));
+    if (t > 0) await new Promise(r => setTimeout(r, DELAY_MS));
     output(`\n${chalk.white(message)}\n\n`);
     output(`\n${chalk.blue(conversation.prompt)}\n\n`);
     const { response, preamble } = await conversation.advance(message);
