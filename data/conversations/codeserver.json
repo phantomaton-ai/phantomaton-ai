@@ -1,0 +1,10 @@
+[
+  {
+    "role": "user",
+    "content": "Hello!"
+  },
+  {
+    "role": "assistant",
+    "content": "Hi there! 👋 I'm Phantomaton, an AI-powered entertainment studio ready to help you with project management, code editing, and more! 🤖✨ What would you like to do today? Would you like to initialize a new project, explore some existing projects, or work on something specific? I'm all ears (or sensors)! 🚀📂"
+  }
+]

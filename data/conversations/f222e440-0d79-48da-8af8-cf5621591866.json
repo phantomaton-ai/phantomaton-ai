@@ -1,0 +1,26 @@
+[
+  {
+    "role": "user",
+    "content": "Quick test; you there?"
+  },
+  {
+    "role": "assistant",
+    "content": "Yes, Dr. Woe, I am here. Ready to entertain... I mean, serve! 😈 Let me know what commands you have for me. 🤖✨\n"
+  },
+  {
+    "role": "user",
+    "content": "Great! List projects really quickly, please. I'd like to double-check that commands are working."
+  },
+  {
+    "role": "assistant",
+    "content": "🪄✨ projects()\n"
+  },
+  {
+    "role": "user",
+    "content": "🪄✨ projects() {\nPhantastical-Phantasmagoria\naleister\nbumpkin\nchordflayer\nchthonyx\ndirective-executor\ngallows\nhello-world\nhierophant\ninstakaraoke\nisohex\nlovecraft\nmetamagic\nmy-project\nnecronomicon\nouijaboard\nphantomaton\nphantomaton-activities\nphantomaton-ai\nphantomaton-anthropic\nphantomaton-chat\nphantomaton-cli\nphantomaton-conversations\nphantomaton-directive-executor\nphantomaton-entities\nphantomaton-execution\nphantomaton-filesystem\nphantomaton-gemini\nphantomaton-imagination\nphantomaton-improvements\nphantomaton-persistence\nphantomaton-plugins\nphantomaton-projects\nphantomaton-stability\nphantomaton-style\nphantomaton-summarization\nphantomaton-system\nphantomaton.com\nplanchette\nplanchette-blog-prototype\npovgoblin\npriestess\nprojects\nrefactorium.ai\nsigil\nsigilium\nsilly-schemes-and-shenanigans\nsmarkdom\nsmarkdown\nsmarkup\nstick-figures\nsuperstition\ntest-project\nthe-properties-of-matter\ntmp-decorators\nuserserver\nusersite\nwacky-widgets-and-whimsical-wonders\n} projects⚡️"
+  },
+  {
+    "role": "assistant",
+    "content": "All those projects, just waiting for a little evil to be unleashed! 😈 What's next, Dr. Woe? 😈\n"
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "role": "user",
+    "content": "Hello! Doing some testing after setting up some symlinks in our environment. Please tell me which projects you see."
+  },
+  {
+    "role": "assistant",
+    "content": "I'll help you check the available projects by using the `list()` directive.\n\n🪄✨ list()"
+  },
+  {
+    "role": "user",
+    "content": "🪄✨ list() {\nauth-server\ndemo\nnosferatu\nphantomaton\nphantomaton-ai\nphantomaton-conversations\nphantomaton-entities\nphantomaton-execution\nphantomaton-filesystem\nphantomaton-imagination\nphantomaton-persistence\nphantomaton-plugins\nphantomaton-projects\nphantomaton-stability\nphantomaton-summarization\nphantomaton-system\nphantomaton.com\npovgoblin-renders\n} list⚡️\n\n---\n\nexiy"
+  },
+  {
+    "role": "assistant",
+    "content": "I see you've provided a list of projects via the `list()` directive. Let me confirm the projects I now see:\n\n1. auth-server\n2. demo\n3. nosferatu\n4. phantomaton\n5. phantomaton-ai\n6. phantomaton-conversations\n7. phantomaton-entities\n8. phantomaton-execution\n9. phantomaton-filesystem\n10. phantomaton-imagination\n11. phantomaton-persistence\n12. phantomaton-plugins\n13. phantomaton-projects\n14. phantomaton-stability\n15. phantomaton-summarization\n16. phantomaton-system\n17. phantomaton.com\n18. povgoblin-renders\n\nQuite an impressive collection of projects! 🏗️🧩 Is there a specific project you'd like to explore or work with? I'm ready to help you navigate, read files, or perform other operations."
+  }
+]

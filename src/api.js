@@ -13,4 +13,6 @@ import gemini from 'phantomaton-gemini';
 export default gemini({
   apiKey: process.env.GEMINI_API_KEY,
   model: 'gemini-2.0-flash'
+  // model: 'gemini-2.0-flash-lite'
+  // model: 'gemini-2.5-pro-exp-03-25'
 });
