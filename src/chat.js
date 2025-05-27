@@ -1,11 +1,13 @@
 import chalk from 'chalk';
 import { Conversation } from './conversation.js';
 import { getUserInput } from './input.js';
+import interrupt from './interrupt.js';
 
 const output = text => process.stdout.write(text);
 const main = async (conversation) => {
   while (true) {
-    const userInput = await getUserInput('> ');
+    const inputNeeded = (conversation.preamble.trim().length < 1) || await interrupt(5000);
+    const userInput = inputNeeded ? await getUserInput('> ') : '';
     if (userInput.toLowerCase() === 'exit') break;
     output(`\n${chalk.blue(conversation.prompt)}\n\n`);
     const { response, preamble } = await conversation.advance(userInput);

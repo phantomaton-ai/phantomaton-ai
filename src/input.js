@@ -1,5 +1,6 @@
 const getUserInput = async (prompt) => {
   process.stdout.write(prompt);
+  process.stdin.setRawMode(false);
   return new Promise((resolve) => {
     const lines = [];
     process.stdin.on('data', (data) => {
