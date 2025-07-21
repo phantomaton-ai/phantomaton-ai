@@ -6,7 +6,7 @@ import { execute } from './execute.js';
 import { getSystemPrompt } from './prompt.js';
 import summarize from './summarize.js';
 
-const MAX_CONVERSATION_TURNS = 80;
+const MAX_CONVERSATION_TURNS = 52;
 const MAX_CONVERSATION_LENGTH = MAX_CONVERSATION_TURNS * 2;
 const SUMMARIZATION_THRESHOLD = MAX_CONVERSATION_LENGTH / 2;
 
@@ -32,9 +32,10 @@ class Conversation {
   async resummarize() {
     if (this.messages.length < SUMMARIZATION_THRESHOLD) return;
     if (this.messages.length % SUMMARIZATION_THRESHOLD !== 0) return;
-    this.summary = await summarize(this.messages.slice(-MAX_CONVERSATION_LENGTH), this.prompt);;
+    this.summary = await summarize(this.messages.slice(-MAX_CONVERSATION_LENGTH), this.prompt);
     this.prompt = getSystemPrompt(this.summary);
-    fs.writeFileSync(this.summaryPath, this.summary);
+    console.log(this.summary);
+    if (this.summary) fs.writeFileSync(this.summaryPath, this.summary);
   }
 
   async advance(message) {
